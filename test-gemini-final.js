@@ -2,7 +2,7 @@
  * Test final Gemini avec les bons modèles
  */
 
-const apiKey = 'AIzaSyBedSTR_DeOiWuGB0Fj33OprBfGjHewzrY';
+const apiKey = '';
 
 async function testModel(modelName) {
   console.log(`\n🔍 Test: ${modelName}...`);
