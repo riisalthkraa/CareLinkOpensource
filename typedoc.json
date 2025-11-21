@@ -1,0 +1,57 @@
+{
+  "entryPoints": ["src"],
+  "entryPointStrategy": "expand",
+  "out": "test-web-published/docs",
+  "name": "CareLink v2.0.0 - Documentation API",
+  "readme": "docs/README.md",
+  "includeVersion": true,
+  "excludePrivate": false,
+  "excludeProtected": false,
+  "excludeExternals": true,
+  "excludeNotDocumented": false,
+  "hideGenerator": false,
+  "plugin": [],
+  "theme": "default",
+  "skipErrorChecking": true,
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "noEmit": true
+  },
+  "navigationLinks": {
+    "GitHub": "https://github.com/carelink",
+    "Tests": "../index.html",
+    "Accueil": "../home.html"
+  },
+  "sidebarLinks": {
+    "Architecture": "../docs/architecture/OVERVIEW.md",
+    "Database": "../docs/architecture/DATABASE.md",
+    "Sécurité": "../docs/architecture/SECURITY.md"
+  },
+  "validation": {
+    "notExported": false,
+    "invalidLink": false,
+    "notDocumented": false
+  },
+  "categorizeByGroup": true,
+  "defaultCategory": "Other",
+  "categoryOrder": [
+    "Pages",
+    "Components",
+    "Services",
+    "Contexts",
+    "Hooks",
+    "Types",
+    "Utils",
+    "*"
+  ],
+  "sort": ["kind", "instance-first", "alphabetical"],
+  "kindSortOrder": [
+    "Module",
+    "Class",
+    "Interface",
+    "Enum",
+    "Function",
+    "TypeAlias",
+    "Variable"
+  ]
+}

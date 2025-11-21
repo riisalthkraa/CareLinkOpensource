@@ -1,0 +1,375 @@
+/**
+ * Styles pour la page Dossier Médical
+ *
+ * Ce fichier contient tous les styles spécifiques à la page de gestion
+ * du dossier médical, incluant:
+ * - Statistiques rapides
+ * - Onglets de navigation
+ * - Cartes d'antécédents, diagnostics, bilans, consultations
+ * - États visuels (sévérité, statut, résultats)
+ * - Responsive design
+ *
+ * @author VIEY David
+ * @version 2.0.0
+ */
+
+/* ============================================================================
+   CONTENEUR PRINCIPAL
+   ============================================================================ */
+
+.dossier-medical-page {
+  padding: var(--spacing-lg);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ============================================================================
+   STATISTIQUES RAPIDES
+   ============================================================================ */
+
+.dossier-stats {
+  display: grid;
+  gap: var(--spacing-md);
+}
+
+.dossier-stats .stat-card {
+  background: var(--card-background);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  text-align: center;
+  transition: all var(--transition-base);
+}
+
+.dossier-stats .stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary);
+}
+
+.dossier-stats .stat-icon {
+  font-size: 2.5rem;
+  margin-bottom: var(--spacing-sm);
+  display: block;
+}
+
+.dossier-stats .stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.dossier-stats .stat-label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* ============================================================================
+   ONGLETS DE NAVIGATION
+   ============================================================================ */
+
+.dossier-tabs {
+  display: flex;
+  gap: var(--spacing-sm);
+  border-bottom: 2px solid var(--border-light);
+  margin-bottom: var(--spacing-lg);
+  overflow-x: auto;
+}
+
+.dossier-tabs .tab {
+  background: transparent;
+  border: none;
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+  position: relative;
+  bottom: -2px;
+}
+
+.dossier-tabs .tab:hover {
+  color: var(--primary);
+  background: var(--bg-secondary);
+}
+
+.dossier-tabs .tab.active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+  background: var(--bg-secondary);
+}
+
+/* ============================================================================
+   ÉTATS VIDES
+   ============================================================================ */
+
+.empty-state {
+  text-align: center;
+  padding: var(--spacing-2xl) var(--spacing-lg);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  border: 2px dashed var(--border-light);
+}
+
+.empty-state .text-lg {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+}
+
+/* ============================================================================
+   CARTES D'ITEMS (Antécédents, Diagnostics, etc.)
+   ============================================================================ */
+
+.card-item {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
+  transition: all var(--transition-base);
+}
+
+.card-item:hover {
+  box-shadow: var(--shadow-sm);
+  border-color: var(--primary);
+  transform: translateX(4px);
+}
+
+.card-item:last-child {
+  margin-bottom: 0;
+}
+
+/* En-tête de l'item */
+.item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-md);
+}
+
+.item-title {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  flex: 1;
+}
+
+.item-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.item-title strong {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.item-date {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* Description */
+.item-description {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--spacing-md);
+}
+
+/* Détails (ligne avec icônes) */
+.item-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.item-details span {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+/* Notes */
+.item-notes {
+  background: var(--bg-primary);
+  border-left: 3px solid var(--primary);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-top: var(--spacing-md);
+}
+
+/* Motif consultation */
+.item-motif {
+  margin-bottom: var(--spacing-sm);
+  font-size: 0.95rem;
+}
+
+.item-diagnostic {
+  background: var(--bg-info);
+  border-left: 3px solid var(--info);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--spacing-sm);
+}
+
+.item-next-rdv {
+  background: var(--bg-warning);
+  border-left: 3px solid var(--warning);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+}
+
+/* ============================================================================
+   BADGES DE SÉVÉRITÉ ET STATUT
+   ============================================================================ */
+
+.severite-legere {
+  background: var(--bg-success);
+  color: var(--success);
+  border: 1px solid var(--success);
+}
+
+.severite-moderee {
+  background: var(--bg-warning);
+  color: var(--warning);
+  border: 1px solid var(--warning);
+}
+
+.severite-grave {
+  background: var(--bg-error);
+  color: var(--error);
+  border: 1px solid var(--error);
+}
+
+.severite-critique {
+  background: #FEE;
+  color: #C00;
+  border: 1px solid #C00;
+  font-weight: 700;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* Badges de statut diagnostic */
+.badge-actif {
+  background: var(--bg-error);
+  color: var(--error);
+  border: 1px solid var(--error);
+}
+
+.badge-en_remission {
+  background: var(--bg-warning);
+  color: var(--warning);
+  border: 1px solid var(--warning);
+}
+
+.badge-gueri, .badge-stabilise {
+  background: var(--bg-success);
+  color: var(--success);
+  border: 1px solid var(--success);
+}
+
+/* ============================================================================
+   LISTES SPÉCIFIQUES
+   ============================================================================ */
+
+.antecedents-list,
+.diagnostics-list,
+.bilans-list,
+.consultations-list {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================ */
+
+@media (max-width: 768px) {
+  .dossier-medical-page {
+    padding: var(--spacing-md);
+  }
+
+  .dossier-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dossier-tabs {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .dossier-tabs .tab {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: 0.9rem;
+  }
+
+  .item-header {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .item-details {
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+}
+
+@media (max-width: 480px) {
+  .dossier-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .dossier-stats .stat-card {
+    padding: var(--spacing-md);
+  }
+
+  .dossier-stats .stat-icon {
+    font-size: 2rem;
+  }
+
+  .dossier-stats .stat-value {
+    font-size: 1.5rem;
+  }
+}
+
+/* ============================================================================
+   IMPRESSION
+   ============================================================================ */
+
+@media print {
+  .dossier-tabs,
+  .page-header-right,
+  .btn,
+  .sidebar {
+    display: none !important;
+  }
+
+  .card-item {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .card-item:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}

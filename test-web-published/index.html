@@ -1,0 +1,913 @@
+<html><head><meta charset="utf-8"/><title>CareLink - Test Report</title><style type="text/css">:root {
+  --text-primary: #111;
+  --text-secondary: #4f4f4f;
+  --success: #006633;
+  --success-bright: #80ffbf;
+  --danger: #cc071e;
+  --danger-bright: #fbdfe0;
+  --warning: #995c00;
+  --warning-bright: #ffeea8;
+  --panel: #eee;
+  --border: #949494;
+  --disabled: #6b6b6b;
+}
+
+html,
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  color: var(--text-primary);
+}
+body {
+  padding: 2rem 1rem;
+}
+.jesthtml-content {
+  margin: 0 auto;
+  max-width: 70rem;
+}
+header {
+  display: flex;
+  align-items: center;
+}
+#title {
+  margin: 0;
+  flex-grow: 1;
+}
+#logo {
+  height: 4rem;
+}
+#timestamp {
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+}
+
+#metadata-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.additional-information-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+}
+
+/** SUMMARY */
+#summary {
+  color: var(--text-primary);
+  display: flex;
+  font-family: monospace;
+  font-size: 1rem;
+}
+#summary > div {
+  margin-right: 0.5rem;
+  background: var(--panel);
+  padding: 1rem;
+  min-width: 15rem;
+}
+#summary > div:last-child {
+  margin-right: 0;
+}
+@media only screen and (max-width: 720px) {
+  #summary {
+    flex-direction: column;
+  }
+  #summary > div {
+    margin-right: 0;
+    margin-top: 1rem;
+  }
+  #summary > div:first-child {
+    margin-top: 0;
+  }
+}
+
+.summary-total {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+.summary-passed {
+  color: var(--success);
+  border-left: 0.4rem solid var(--success);
+  padding-left: 0.5rem;
+  margin-bottom: 0.15rem;
+}
+.summary-failed,
+.summary-obsolete-snapshots {
+  color: var(--danger);
+  border-left: 0.4rem solid var(--danger);
+  padding-left: 0.5rem;
+  margin-bottom: 0.15rem;
+}
+.summary-pending {
+  color: var(--warning);
+  border-left: 0.4rem solid var(--warning);
+  padding-left: 0.5rem;
+  margin-bottom: 0.15rem;
+}
+.summary-empty {
+  color: var(--disabled);
+  border-left: 0.4rem solid var(--disabled);
+  margin-bottom: 0.15rem;
+}
+
+.test-result {
+  padding: 1rem;
+  margin-bottom: 0.25rem;
+}
+.test-result:last-child {
+  border: 0;
+}
+.test-result.passed {
+  background-color: var(--success-bright);
+  color: var(--success);
+}
+.test-result.failed {
+  background-color: var(--danger-bright);
+  color: var(--danger);
+}
+.test-result.pending {
+  background-color: var(--warning-bright);
+  color: var(--warning);
+}
+
+.test-info {
+  display: flex;
+  justify-content: space-between;
+}
+.test-suitename {
+  width: 20%;
+  text-align: left;
+  font-weight: bold;
+  word-break: break-word;
+}
+.test-title {
+  width: 40%;
+  text-align: left;
+  font-style: italic;
+}
+.test-status {
+  width: 20%;
+  text-align: right;
+}
+.test-duration {
+  width: 10%;
+  text-align: right;
+  font-size: 0.85rem;
+}
+
+.failureMessages {
+  padding: 0 1rem;
+  margin-top: 1rem;
+  border-top: 1px dashed var(--danger);
+}
+.failureMessages.suiteFailure {
+  border-top: none;
+}
+.failureMsg {
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+
+.suite-container {
+  margin-bottom: 1rem;
+}
+.suite-info {
+  padding: 1rem;
+  background-color: var(--panel);
+  color: var(--text-secondary);
+  border: 0.15rem solid;
+  border-color: var(--panel);
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.25rem;
+}
+.suite-info:hover {
+  border-color: var(--border);
+  cursor: pointer;
+}
+.suite-info .suite-path {
+  word-break: break-all;
+  flex-grow: 1;
+  font-family: monospace;
+  font-size: 1rem;
+}
+.suite-info .suite-time {
+  margin-left: 1rem;
+  padding: 0.2rem 0.3rem;
+  font-size: 0.85rem;
+}
+.suite-info .suite-time.warn {
+  background-color: var(--danger);
+  color: #fff;
+}
+.suite-info:before {
+  content: "\2303";
+  display: inline-block;
+  margin-right: 1rem;
+  transform: rotate(180deg) translateY(0.15rem);
+}
+.suite-container[open] .suite-info:before {
+  transform: rotate(0deg) translateY(0.15rem);
+}
+
+/* CONSOLE LOGS */
+.suite-consolelog {
+  margin-bottom: 0.25rem;
+  padding: 1rem;
+  background-color: var(--panel);
+}
+.suite-consolelog-header {
+  font-weight: bold;
+}
+.suite-consolelog-item {
+  padding: 0.5rem;
+}
+.suite-consolelog-item pre {
+  margin: 0.5rem 0;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+.suite-consolelog-item-origin {
+  color: var(--text-secondary);
+  font-weight: bold;
+}
+.suite-consolelog-item-message {
+  color: var(--text-primary);
+  font-size: 1rem;
+  padding: 0 0.5rem;
+}
+
+/* OBSOLETE SNAPSHOTS */
+.suite-obsolete-snapshots {
+  margin-bottom: 0.25rem;
+  padding: 1rem;
+  background-color: var(--danger-bright);
+  color: var(--danger);
+}
+.suite-obsolete-snapshots-header {
+  font-weight: bold;
+}
+.suite-obsolete-snapshots-item {
+  padding: 0.5rem;
+}
+.suite-obsolete-snapshots-item pre {
+  margin: 0.5rem 0;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+.suite-obsolete-snapshots-item-message {
+  color: var(--text-primary);
+  font-size: 1rem;
+  padding: 0 0.5rem;
+}
+</style></head><body><main class="jesthtml-content"><header><h1 id="title">CareLink - Test Report</h1></header><section id="metadata-container"><div id="timestamp">Started: 2025-11-19 23:51:03</div><div id="summary"><div id="suite-summary"><div class="summary-total">Suites (8)</div><div class="summary-passed ">5 passed</div><div class="summary-failed ">3 failed</div><div class="summary-pending  summary-empty">0 pending</div></div><div id="test-summary"><div class="summary-total">Tests (108)</div><div class="summary-passed ">75 passed</div><div class="summary-failed ">33 failed</div><div class="summary-pending  summary-empty">0 pending</div></div></div></section><details id="suite-1" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">C:\Users\RK\Desktop\CareLink DEV\CareLink\src\__tests__\Login.test.tsx</div><div class="suite-time">2.304s</div></summary><div class="suite-tests"><div class="test-result failed"><div class="test-info"><div class="test-suitename">Login Component</div><div class="test-title">should render login form</div><div class="test-status">failed</div><div class="test-duration">0.293s</div></div><div class="failureMessages"> <pre class="failureMsg">ReferenceError: React is not defined
+    at Login (C:\Users\RK\Desktop\CareLink DEV\CareLink\src\pages\Login.tsx:189:5)
+    at renderWithHooks (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:20103:13)
+    at beginWork (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:21626:16)
+    at beginWork$1 (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:27465:14)
+    at performUnitOfWork (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:26599:12)
+    at workLoopSync (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:26505:5)
+    at renderRootSync (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:26473:7)
+    at recoverFromConcurrentError (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:25889:20)
+    at performConcurrentWorkOnRoot (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:25789:22)
+    at flushActQueue (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react\cjs\react.development.js:2667:24)
+    at act (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react\cjs\react.development.js:2582:11)
+    at C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\@testing-library\react\dist\act-compat.js:47:25
+    at renderRoot (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\@testing-library\react\dist\pure.js:190:26)
+    at render (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\@testing-library\react\dist\pure.js:292:10)
+    at Object.&lt;anonymous&gt; (C:\Users\RK\Desktop\CareLink DEV\CareLink\src\__tests__\Login.test.tsx:18:11)
+    at Promise.finally.completed (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1557:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1497:10)
+    at _callCircusTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1007:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:947:3)
+    at C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:849:7
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:862:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at run (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:761:3)
+    at runAndTransformResultsToJestFormat (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1918:21)
+    at jestAdapter (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\runner.js:101:19)
+    at runTestInternal (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:275:16)
+    at runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:343:7)
+    at Object.worker (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:497:12)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">Login Component</div><div class="test-title">should handle successful login</div><div class="test-status">failed</div><div class="test-duration">0.052s</div></div><div class="failureMessages"> <pre class="failureMsg">ReferenceError: React is not defined
+    at Login (C:\Users\RK\Desktop\CareLink DEV\CareLink\src\pages\Login.tsx:189:5)
+    at renderWithHooks (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:20103:13)
+    at beginWork (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:21626:16)
+    at beginWork$1 (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:27465:14)
+    at performUnitOfWork (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:26599:12)
+    at workLoopSync (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:26505:5)
+    at renderRootSync (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:26473:7)
+    at recoverFromConcurrentError (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:25889:20)
+    at performConcurrentWorkOnRoot (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:25789:22)
+    at flushActQueue (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react\cjs\react.development.js:2667:24)
+    at act (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react\cjs\react.development.js:2582:11)
+    at C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\@testing-library\react\dist\act-compat.js:47:25
+    at renderRoot (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\@testing-library\react\dist\pure.js:190:26)
+    at render (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\@testing-library\react\dist\pure.js:292:10)
+    at Object.&lt;anonymous&gt; (C:\Users\RK\Desktop\CareLink DEV\CareLink\src\__tests__\Login.test.tsx:34:11)
+    at Promise.finally.completed (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1557:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1497:10)
+    at _callCircusTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1007:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:947:3)
+    at C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:849:7
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:862:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at run (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:761:3)
+    at runAndTransformResultsToJestFormat (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1918:21)
+    at jestAdapter (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\runner.js:101:19)
+    at runTestInternal (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:275:16)
+    at runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:343:7)
+    at Object.worker (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:497:12)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">Login Component</div><div class="test-title">should show error for invalid credentials</div><div class="test-status">failed</div><div class="test-duration">0.039s</div></div><div class="failureMessages"> <pre class="failureMsg">ReferenceError: React is not defined
+    at Login (C:\Users\RK\Desktop\CareLink DEV\CareLink\src\pages\Login.tsx:189:5)
+    at renderWithHooks (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:20103:13)
+    at beginWork (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:21626:16)
+    at beginWork$1 (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:27465:14)
+    at performUnitOfWork (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:26599:12)
+    at workLoopSync (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:26505:5)
+    at renderRootSync (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:26473:7)
+    at recoverFromConcurrentError (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:25889:20)
+    at performConcurrentWorkOnRoot (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:25789:22)
+    at flushActQueue (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react\cjs\react.development.js:2667:24)
+    at act (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react\cjs\react.development.js:2582:11)
+    at C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\@testing-library\react\dist\act-compat.js:47:25
+    at renderRoot (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\@testing-library\react\dist\pure.js:190:26)
+    at render (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\@testing-library\react\dist\pure.js:292:10)
+    at Object.&lt;anonymous&gt; (C:\Users\RK\Desktop\CareLink DEV\CareLink\src\__tests__\Login.test.tsx:65:11)
+    at Promise.finally.completed (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1557:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1497:10)
+    at _callCircusTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1007:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:947:3)
+    at C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:849:7
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:862:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at run (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:761:3)
+    at runAndTransformResultsToJestFormat (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1918:21)
+    at jestAdapter (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\runner.js:101:19)
+    at runTestInternal (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:275:16)
+    at runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:343:7)
+    at Object.worker (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:497:12)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">Login Component</div><div class="test-title">should validate required fields</div><div class="test-status">failed</div><div class="test-duration">0.043s</div></div><div class="failureMessages"> <pre class="failureMsg">ReferenceError: React is not defined
+    at Login (C:\Users\RK\Desktop\CareLink DEV\CareLink\src\pages\Login.tsx:189:5)
+    at renderWithHooks (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:20103:13)
+    at beginWork (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:21626:16)
+    at beginWork$1 (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:27465:14)
+    at performUnitOfWork (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:26599:12)
+    at workLoopSync (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:26505:5)
+    at renderRootSync (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:26473:7)
+    at recoverFromConcurrentError (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:25889:20)
+    at performConcurrentWorkOnRoot (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:25789:22)
+    at flushActQueue (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react\cjs\react.development.js:2667:24)
+    at act (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react\cjs\react.development.js:2582:11)
+    at C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\@testing-library\react\dist\act-compat.js:47:25
+    at renderRoot (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\@testing-library\react\dist\pure.js:190:26)
+    at render (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\@testing-library\react\dist\pure.js:292:10)
+    at Object.&lt;anonymous&gt; (C:\Users\RK\Desktop\CareLink DEV\CareLink\src\__tests__\Login.test.tsx:89:11)
+    at Promise.finally.completed (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1557:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1497:10)
+    at _callCircusTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1007:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:947:3)
+    at C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:849:7
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:862:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at run (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:761:3)
+    at runAndTransformResultsToJestFormat (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1918:21)
+    at jestAdapter (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\runner.js:101:19)
+    at runTestInternal (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:275:16)
+    at runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:343:7)
+    at Object.worker (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:497:12)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">Login Component</div><div class="test-title">should show signup form when clicking create account</div><div class="test-status">failed</div><div class="test-duration">0.036s</div></div><div class="failureMessages"> <pre class="failureMsg">ReferenceError: React is not defined
+    at Login (C:\Users\RK\Desktop\CareLink DEV\CareLink\src\pages\Login.tsx:189:5)
+    at renderWithHooks (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:20103:13)
+    at beginWork (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:21626:16)
+    at beginWork$1 (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:27465:14)
+    at performUnitOfWork (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:26599:12)
+    at workLoopSync (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:26505:5)
+    at renderRootSync (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:26473:7)
+    at recoverFromConcurrentError (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:25889:20)
+    at performConcurrentWorkOnRoot (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:25789:22)
+    at flushActQueue (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react\cjs\react.development.js:2667:24)
+    at act (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react\cjs\react.development.js:2582:11)
+    at C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\@testing-library\react\dist\act-compat.js:47:25
+    at renderRoot (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\@testing-library\react\dist\pure.js:190:26)
+    at render (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\@testing-library\react\dist\pure.js:292:10)
+    at Object.&lt;anonymous&gt; (C:\Users\RK\Desktop\CareLink DEV\CareLink\src\__tests__\Login.test.tsx:102:11)
+    at Promise.finally.completed (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1557:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1497:10)
+    at _callCircusTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1007:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:947:3)
+    at C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:849:7
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:862:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at run (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:761:3)
+    at runAndTransformResultsToJestFormat (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1918:21)
+    at jestAdapter (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\runner.js:101:19)
+    at runTestInternal (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:275:16)
+    at runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:343:7)
+    at Object.worker (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:497:12)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">Login Component</div><div class="test-title">should handle database errors gracefully</div><div class="test-status">failed</div><div class="test-duration">0.029s</div></div><div class="failureMessages"> <pre class="failureMsg">ReferenceError: React is not defined
+    at Login (C:\Users\RK\Desktop\CareLink DEV\CareLink\src\pages\Login.tsx:189:5)
+    at renderWithHooks (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:20103:13)
+    at beginWork (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:21626:16)
+    at beginWork$1 (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:27465:14)
+    at performUnitOfWork (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:26599:12)
+    at workLoopSync (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:26505:5)
+    at renderRootSync (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:26473:7)
+    at recoverFromConcurrentError (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:25889:20)
+    at performConcurrentWorkOnRoot (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react-dom\cjs\react-dom.development.js:25789:22)
+    at flushActQueue (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react\cjs\react.development.js:2667:24)
+    at act (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\react\cjs\react.development.js:2582:11)
+    at C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\@testing-library\react\dist\act-compat.js:47:25
+    at renderRoot (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\@testing-library\react\dist\pure.js:190:26)
+    at render (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\@testing-library\react\dist\pure.js:292:10)
+    at Object.&lt;anonymous&gt; (C:\Users\RK\Desktop\CareLink DEV\CareLink\src\__tests__\Login.test.tsx:128:11)
+    at Promise.finally.completed (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1557:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1497:10)
+    at _callCircusTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1007:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:947:3)
+    at C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:849:7
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:862:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at run (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:761:3)
+    at runAndTransformResultsToJestFormat (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1918:21)
+    at jestAdapter (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\runner.js:101:19)
+    at runTestInternal (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:275:16)
+    at runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:343:7)
+    at Object.worker (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:497:12)</pre></div></div></div></details><details id="suite-2" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">C:\Users\RK\Desktop\CareLink DEV\CareLink\tests\aiProviders.test.ts</div><div class="suite-time">2.973s</div></summary><div class="suite-tests"><div class="test-result failed"><div class="test-info"><div class="test-suitename">AIProviderManager &gt; Configuration Management</div><div class="test-title">should add a configuration with default values</div><div class="test-status">failed</div><div class="test-duration">0.012s</div></div><div class="failureMessages"> <pre class="failureMsg">TypeError: aiProviders_1.AIProviderManager is not a constructor
+    at Object.&lt;anonymous&gt; (C:\Users\RK\Desktop\CareLink DEV\CareLink\tests\aiProviders.test.ts:15:15)
+    at Promise.finally.completed (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1557:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1497:10)
+    at _callCircusHook (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:976:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:941:5)
+    at C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:849:7
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:862:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at run (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:761:3)
+    at runAndTransformResultsToJestFormat (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1918:21)
+    at jestAdapter (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\runner.js:101:19)
+    at runTestInternal (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:275:16)
+    at runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:343:7)
+    at Object.worker (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:497:12)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">AIProviderManager &gt; Configuration Management</div><div class="test-title">should add multiple configurations and sort by priority</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">TypeError: aiProviders_1.AIProviderManager is not a constructor
+    at Object.&lt;anonymous&gt; (C:\Users\RK\Desktop\CareLink DEV\CareLink\tests\aiProviders.test.ts:15:15)
+    at Promise.finally.completed (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1557:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1497:10)
+    at _callCircusHook (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:976:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:941:5)
+    at C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:849:7
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:862:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at run (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:761:3)
+    at runAndTransformResultsToJestFormat (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1918:21)
+    at jestAdapter (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\runner.js:101:19)
+    at runTestInternal (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:275:16)
+    at runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:343:7)
+    at Object.worker (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:497:12)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">AIProviderManager &gt; Configuration Management</div><div class="test-title">should remove a configuration by ID</div><div class="test-status">failed</div><div class="test-duration">0.002s</div></div><div class="failureMessages"> <pre class="failureMsg">TypeError: aiProviders_1.AIProviderManager is not a constructor
+    at Object.&lt;anonymous&gt; (C:\Users\RK\Desktop\CareLink DEV\CareLink\tests\aiProviders.test.ts:15:15)
+    at Promise.finally.completed (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1557:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1497:10)
+    at _callCircusHook (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:976:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:941:5)
+    at C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:849:7
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:862:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at run (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:761:3)
+    at runAndTransformResultsToJestFormat (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1918:21)
+    at jestAdapter (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\runner.js:101:19)
+    at runTestInternal (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:275:16)
+    at runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:343:7)
+    at Object.worker (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:497:12)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">AIProviderManager &gt; Configuration Management</div><div class="test-title">should toggle configuration active state</div><div class="test-status">failed</div><div class="test-duration">0.002s</div></div><div class="failureMessages"> <pre class="failureMsg">TypeError: aiProviders_1.AIProviderManager is not a constructor
+    at Object.&lt;anonymous&gt; (C:\Users\RK\Desktop\CareLink DEV\CareLink\tests\aiProviders.test.ts:15:15)
+    at Promise.finally.completed (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1557:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1497:10)
+    at _callCircusHook (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:976:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:941:5)
+    at C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:849:7
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:862:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at run (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:761:3)
+    at runAndTransformResultsToJestFormat (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1918:21)
+    at jestAdapter (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\runner.js:101:19)
+    at runTestInternal (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:275:16)
+    at runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:343:7)
+    at Object.worker (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:497:12)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">AIProviderManager &gt; Configuration Management</div><div class="test-title">should update priority and re-sort</div><div class="test-status">failed</div><div class="test-duration">0.002s</div></div><div class="failureMessages"> <pre class="failureMsg">TypeError: aiProviders_1.AIProviderManager is not a constructor
+    at Object.&lt;anonymous&gt; (C:\Users\RK\Desktop\CareLink DEV\CareLink\tests\aiProviders.test.ts:15:15)
+    at Promise.finally.completed (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1557:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1497:10)
+    at _callCircusHook (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:976:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:941:5)
+    at C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:849:7
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:862:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at run (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:761:3)
+    at runAndTransformResultsToJestFormat (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1918:21)
+    at jestAdapter (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\runner.js:101:19)
+    at runTestInternal (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:275:16)
+    at runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:343:7)
+    at Object.worker (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:497:12)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">AIProviderManager &gt; Multi-Provider Fallback</div><div class="test-title">should use highest priority provider first</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">TypeError: aiProviders_1.AIProviderManager is not a constructor
+    at Object.&lt;anonymous&gt; (C:\Users\RK\Desktop\CareLink DEV\CareLink\tests\aiProviders.test.ts:15:15)
+    at Promise.finally.completed (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1557:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1497:10)
+    at _callCircusHook (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:976:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:941:5)
+    at C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:849:7
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:862:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at run (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:761:3)
+    at runAndTransformResultsToJestFormat (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1918:21)
+    at jestAdapter (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\runner.js:101:19)
+    at runTestInternal (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:275:16)
+    at runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:343:7)
+    at Object.worker (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:497:12)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">AIProviderManager &gt; Multi-Provider Fallback</div><div class="test-title">should fallback to next provider if first fails</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">TypeError: aiProviders_1.AIProviderManager is not a constructor
+    at Object.&lt;anonymous&gt; (C:\Users\RK\Desktop\CareLink DEV\CareLink\tests\aiProviders.test.ts:15:15)
+    at Promise.finally.completed (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1557:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1497:10)
+    at _callCircusHook (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:976:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:941:5)
+    at C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:849:7
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:862:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at run (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:761:3)
+    at runAndTransformResultsToJestFormat (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1918:21)
+    at jestAdapter (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\runner.js:101:19)
+    at runTestInternal (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:275:16)
+    at runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:343:7)
+    at Object.worker (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:497:12)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">AIProviderManager &gt; Multi-Provider Fallback</div><div class="test-title">should return error if all providers fail</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">TypeError: aiProviders_1.AIProviderManager is not a constructor
+    at Object.&lt;anonymous&gt; (C:\Users\RK\Desktop\CareLink DEV\CareLink\tests\aiProviders.test.ts:15:15)
+    at Promise.finally.completed (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1557:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1497:10)
+    at _callCircusHook (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:976:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:941:5)
+    at C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:849:7
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:862:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at run (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:761:3)
+    at runAndTransformResultsToJestFormat (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1918:21)
+    at jestAdapter (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\runner.js:101:19)
+    at runTestInternal (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:275:16)
+    at runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:343:7)
+    at Object.worker (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:497:12)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">AIProviderManager &gt; Multi-Provider Fallback</div><div class="test-title">should skip inactive providers</div><div class="test-status">failed</div><div class="test-duration">0.003s</div></div><div class="failureMessages"> <pre class="failureMsg">TypeError: aiProviders_1.AIProviderManager is not a constructor
+    at Object.&lt;anonymous&gt; (C:\Users\RK\Desktop\CareLink DEV\CareLink\tests\aiProviders.test.ts:15:15)
+    at Promise.finally.completed (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1557:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1497:10)
+    at _callCircusHook (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:976:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:941:5)
+    at C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:849:7
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:862:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at run (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:761:3)
+    at runAndTransformResultsToJestFormat (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1918:21)
+    at jestAdapter (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\runner.js:101:19)
+    at runTestInternal (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:275:16)
+    at runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:343:7)
+    at Object.worker (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:497:12)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">AIProviderManager &gt; Provider-specific calls</div><div class="test-title">should call Google Gemini API correctly</div><div class="test-status">failed</div><div class="test-duration">0.002s</div></div><div class="failureMessages"> <pre class="failureMsg">TypeError: aiProviders_1.AIProviderManager is not a constructor
+    at Object.&lt;anonymous&gt; (C:\Users\RK\Desktop\CareLink DEV\CareLink\tests\aiProviders.test.ts:15:15)
+    at Promise.finally.completed (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1557:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1497:10)
+    at _callCircusHook (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:976:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:941:5)
+    at C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:849:7
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:862:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at run (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:761:3)
+    at runAndTransformResultsToJestFormat (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1918:21)
+    at jestAdapter (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\runner.js:101:19)
+    at runTestInternal (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:275:16)
+    at runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:343:7)
+    at Object.worker (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:497:12)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">AIProviderManager &gt; Provider-specific calls</div><div class="test-title">should call Anthropic Claude API correctly</div><div class="test-status">failed</div><div class="test-duration"> </div></div><div class="failureMessages"> <pre class="failureMsg">TypeError: aiProviders_1.AIProviderManager is not a constructor
+    at Object.&lt;anonymous&gt; (C:\Users\RK\Desktop\CareLink DEV\CareLink\tests\aiProviders.test.ts:15:15)
+    at Promise.finally.completed (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1557:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1497:10)
+    at _callCircusHook (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:976:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:941:5)
+    at C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:849:7
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:862:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at run (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:761:3)
+    at runAndTransformResultsToJestFormat (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1918:21)
+    at jestAdapter (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\runner.js:101:19)
+    at runTestInternal (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:275:16)
+    at runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:343:7)
+    at Object.worker (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:497:12)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">AIProviderManager &gt; Provider-specific calls</div><div class="test-title">should call OpenAI API correctly</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">TypeError: aiProviders_1.AIProviderManager is not a constructor
+    at Object.&lt;anonymous&gt; (C:\Users\RK\Desktop\CareLink DEV\CareLink\tests\aiProviders.test.ts:15:15)
+    at Promise.finally.completed (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1557:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1497:10)
+    at _callCircusHook (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:976:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:941:5)
+    at C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:849:7
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:862:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at run (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:761:3)
+    at runAndTransformResultsToJestFormat (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1918:21)
+    at jestAdapter (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\runner.js:101:19)
+    at runTestInternal (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:275:16)
+    at runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:343:7)
+    at Object.worker (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:497:12)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">AIProviderManager &gt; Provider-specific calls</div><div class="test-title">should call Ollama local API correctly</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">TypeError: aiProviders_1.AIProviderManager is not a constructor
+    at Object.&lt;anonymous&gt; (C:\Users\RK\Desktop\CareLink DEV\CareLink\tests\aiProviders.test.ts:15:15)
+    at Promise.finally.completed (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1557:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1497:10)
+    at _callCircusHook (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:976:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:941:5)
+    at C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:849:7
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:862:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at run (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:761:3)
+    at runAndTransformResultsToJestFormat (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1918:21)
+    at jestAdapter (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\runner.js:101:19)
+    at runTestInternal (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:275:16)
+    at runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:343:7)
+    at Object.worker (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:497:12)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">AIProviderManager &gt; Error Handling</div><div class="test-title">should return error when no configuration is set</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">TypeError: aiProviders_1.AIProviderManager is not a constructor
+    at Object.&lt;anonymous&gt; (C:\Users\RK\Desktop\CareLink DEV\CareLink\tests\aiProviders.test.ts:15:15)
+    at Promise.finally.completed (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1557:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1497:10)
+    at _callCircusHook (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:976:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:941:5)
+    at C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:849:7
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:862:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at run (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:761:3)
+    at runAndTransformResultsToJestFormat (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1918:21)
+    at jestAdapter (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\runner.js:101:19)
+    at runTestInternal (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:275:16)
+    at runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:343:7)
+    at Object.worker (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:497:12)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">AIProviderManager &gt; Error Handling</div><div class="test-title">should handle API errors gracefully</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">TypeError: aiProviders_1.AIProviderManager is not a constructor
+    at Object.&lt;anonymous&gt; (C:\Users\RK\Desktop\CareLink DEV\CareLink\tests\aiProviders.test.ts:15:15)
+    at Promise.finally.completed (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1557:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1497:10)
+    at _callCircusHook (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:976:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:941:5)
+    at C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:849:7
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:862:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at run (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:761:3)
+    at runAndTransformResultsToJestFormat (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1918:21)
+    at jestAdapter (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\runner.js:101:19)
+    at runTestInternal (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:275:16)
+    at runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:343:7)
+    at Object.worker (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:497:12)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">AIProviderManager &gt; Error Handling</div><div class="test-title">should handle network errors</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">TypeError: aiProviders_1.AIProviderManager is not a constructor
+    at Object.&lt;anonymous&gt; (C:\Users\RK\Desktop\CareLink DEV\CareLink\tests\aiProviders.test.ts:15:15)
+    at Promise.finally.completed (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1557:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1497:10)
+    at _callCircusHook (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:976:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:941:5)
+    at C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:849:7
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:862:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at run (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:761:3)
+    at runAndTransformResultsToJestFormat (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1918:21)
+    at jestAdapter (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\runner.js:101:19)
+    at runTestInternal (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:275:16)
+    at runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:343:7)
+    at Object.worker (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:497:12)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">AIProviderManager &gt; Basic Mode</div><div class="test-title">should work in basic mode without API key</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">TypeError: aiProviders_1.AIProviderManager is not a constructor
+    at Object.&lt;anonymous&gt; (C:\Users\RK\Desktop\CareLink DEV\CareLink\tests\aiProviders.test.ts:15:15)
+    at Promise.finally.completed (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1557:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1497:10)
+    at _callCircusHook (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:976:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:941:5)
+    at C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:849:7
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:862:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at run (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:761:3)
+    at runAndTransformResultsToJestFormat (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1918:21)
+    at jestAdapter (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\runner.js:101:19)
+    at runTestInternal (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:275:16)
+    at runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:343:7)
+    at Object.worker (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:497:12)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">AIProviderManager &gt; Basic Mode</div><div class="test-title">should detect urgency keywords in basic mode</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">TypeError: aiProviders_1.AIProviderManager is not a constructor
+    at Object.&lt;anonymous&gt; (C:\Users\RK\Desktop\CareLink DEV\CareLink\tests\aiProviders.test.ts:15:15)
+    at Promise.finally.completed (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1557:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1497:10)
+    at _callCircusHook (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:976:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:941:5)
+    at C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:849:7
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:862:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at run (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:761:3)
+    at runAndTransformResultsToJestFormat (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1918:21)
+    at jestAdapter (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\runner.js:101:19)
+    at runTestInternal (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:275:16)
+    at runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:343:7)
+    at Object.worker (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:497:12)</pre></div></div></div></details><details id="suite-3" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">C:\Users\RK\Desktop\CareLink DEV\CareLink\tests\components\AIStatusBadge.test.tsx</div><div class="suite-time">3.094s</div></summary><div class="suite-tests"><div class="test-result failed"><div class="test-info"><div class="test-suitename">AIStatusBadge</div><div class="test-title">should display "Mode démo" when no configs</div><div class="test-status">failed</div><div class="test-duration">0.009s</div></div><div class="failureMessages"> <pre class="failureMsg">ReferenceError: React is not defined
+    at Object.&lt;anonymous&gt; (C:\Users\RK\Desktop\CareLink DEV\CareLink\tests\components\AIStatusBadge.test.tsx:35:12)
+    at Promise.finally.completed (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1557:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1497:10)
+    at _callCircusTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1007:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:947:3)
+    at C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:849:7
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:862:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at run (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:761:3)
+    at runAndTransformResultsToJestFormat (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1918:21)
+    at jestAdapter (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\runner.js:101:19)
+    at runTestInternal (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:275:16)
+    at runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:343:7)
+    at Object.worker (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:497:12)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">AIStatusBadge</div><div class="test-title">should display "Gemini" when Google provider is active</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">ReferenceError: React is not defined
+    at Object.&lt;anonymous&gt; (C:\Users\RK\Desktop\CareLink DEV\CareLink\tests\components\AIStatusBadge.test.tsx:53:12)
+    at Promise.finally.completed (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1557:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1497:10)
+    at _callCircusTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1007:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:947:3)
+    at C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:849:7
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:862:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at run (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:761:3)
+    at runAndTransformResultsToJestFormat (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1918:21)
+    at jestAdapter (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\runner.js:101:19)
+    at runTestInternal (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:275:16)
+    at runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:343:7)
+    at Object.worker (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:497:12)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">AIStatusBadge</div><div class="test-title">should display "Claude" when Anthropic provider is active</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">ReferenceError: React is not defined
+    at Object.&lt;anonymous&gt; (C:\Users\RK\Desktop\CareLink DEV\CareLink\tests\components\AIStatusBadge.test.tsx:71:12)
+    at Promise.finally.completed (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1557:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1497:10)
+    at _callCircusTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1007:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:947:3)
+    at C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:849:7
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:862:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at run (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:761:3)
+    at runAndTransformResultsToJestFormat (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1918:21)
+    at jestAdapter (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\runner.js:101:19)
+    at runTestInternal (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:275:16)
+    at runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:343:7)
+    at Object.worker (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:497:12)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">AIStatusBadge</div><div class="test-title">should display "OpenAI" when OpenAI provider is active</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">ReferenceError: React is not defined
+    at Object.&lt;anonymous&gt; (C:\Users\RK\Desktop\CareLink DEV\CareLink\tests\components\AIStatusBadge.test.tsx:89:12)
+    at Promise.finally.completed (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1557:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1497:10)
+    at _callCircusTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1007:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:947:3)
+    at C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:849:7
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:862:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at run (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:761:3)
+    at runAndTransformResultsToJestFormat (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1918:21)
+    at jestAdapter (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\runner.js:101:19)
+    at runTestInternal (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:275:16)
+    at runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:343:7)
+    at Object.worker (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:497:12)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">AIStatusBadge</div><div class="test-title">should display "Ollama" when local provider is active</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">ReferenceError: React is not defined
+    at Object.&lt;anonymous&gt; (C:\Users\RK\Desktop\CareLink DEV\CareLink\tests\components\AIStatusBadge.test.tsx:107:12)
+    at Promise.finally.completed (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1557:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1497:10)
+    at _callCircusTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1007:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:947:3)
+    at C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:849:7
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:862:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at run (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:761:3)
+    at runAndTransformResultsToJestFormat (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1918:21)
+    at jestAdapter (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\runner.js:101:19)
+    at runTestInternal (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:275:16)
+    at runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:343:7)
+    at Object.worker (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:497:12)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">AIStatusBadge</div><div class="test-title">should use highest priority provider when multiple active</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">ReferenceError: React is not defined
+    at Object.&lt;anonymous&gt; (C:\Users\RK\Desktop\CareLink DEV\CareLink\tests\components\AIStatusBadge.test.tsx:138:12)
+    at Promise.finally.completed (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1557:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1497:10)
+    at _callCircusTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1007:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:947:3)
+    at C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:849:7
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:862:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at run (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:761:3)
+    at runAndTransformResultsToJestFormat (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1918:21)
+    at jestAdapter (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\runner.js:101:19)
+    at runTestInternal (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:275:16)
+    at runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:343:7)
+    at Object.worker (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:497:12)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">AIStatusBadge</div><div class="test-title">should ignore inactive providers</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">ReferenceError: React is not defined
+    at Object.&lt;anonymous&gt; (C:\Users\RK\Desktop\CareLink DEV\CareLink\tests\components\AIStatusBadge.test.tsx:164:12)
+    at Promise.finally.completed (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1557:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1497:10)
+    at _callCircusTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1007:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:947:3)
+    at C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:849:7
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:862:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at run (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:761:3)
+    at runAndTransformResultsToJestFormat (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1918:21)
+    at jestAdapter (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\runner.js:101:19)
+    at runTestInternal (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:275:16)
+    at runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:343:7)
+    at Object.worker (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:497:12)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">AIStatusBadge</div><div class="test-title">should display "STATUT IA :" prefix</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">ReferenceError: React is not defined
+    at Object.&lt;anonymous&gt; (C:\Users\RK\Desktop\CareLink DEV\CareLink\tests\components\AIStatusBadge.test.tsx:175:12)
+    at Promise.finally.completed (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1557:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1497:10)
+    at _callCircusTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1007:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:947:3)
+    at C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:849:7
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:862:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at run (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:761:3)
+    at runAndTransformResultsToJestFormat (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1918:21)
+    at jestAdapter (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\runner.js:101:19)
+    at runTestInternal (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:275:16)
+    at runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:343:7)
+    at Object.worker (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:497:12)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">AIStatusBadge</div><div class="test-title">should render status dot</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">ReferenceError: React is not defined
+    at Object.&lt;anonymous&gt; (C:\Users\RK\Desktop\CareLink DEV\CareLink\tests\components\AIStatusBadge.test.tsx:183:34)
+    at Promise.finally.completed (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1557:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1497:10)
+    at _callCircusTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1007:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:947:3)
+    at C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:849:7
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:862:11)
+    at _runTestsForDescribeBlock (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
+    at run (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:761:3)
+    at runAndTransformResultsToJestFormat (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\jestAdapterInit.js:1918:21)
+    at jestAdapter (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-circus\build\runner.js:101:19)
+    at runTestInternal (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:275:16)
+    at runTest (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:343:7)
+    at Object.worker (C:\Users\RK\Desktop\CareLink DEV\CareLink\node_modules\jest-runner\build\testWorker.js:497:12)</pre></div></div></div></details><details id="suite-4" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">C:\Users\RK\Desktop\CareLink DEV\CareLink\src\__tests__\crud.integration.test.ts</div><div class="suite-time">1.971s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">CRUD Operations Integration Tests &gt; Membres CRUD</div><div class="test-title">should create a new membre</div><div class="test-status">passed</div><div class="test-duration">0.258s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">CRUD Operations Integration Tests &gt; Membres CRUD</div><div class="test-title">should read membres list</div><div class="test-status">passed</div><div class="test-duration">0.014s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">CRUD Operations Integration Tests &gt; Membres CRUD</div><div class="test-title">should update a membre</div><div class="test-status">passed</div><div class="test-duration">0.011s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">CRUD Operations Integration Tests &gt; Membres CRUD</div><div class="test-title">should delete a membre</div><div class="test-status">passed</div><div class="test-duration">0.009s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">CRUD Operations Integration Tests &gt; Vaccins CRUD</div><div class="test-title">should create a new vaccin</div><div class="test-status">passed</div><div class="test-duration">0.009s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">CRUD Operations Integration Tests &gt; Vaccins CRUD</div><div class="test-title">should read vaccins for a membre</div><div class="test-status">passed</div><div class="test-duration">0.008s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">CRUD Operations Integration Tests &gt; Vaccins CRUD</div><div class="test-title">should update a vaccin status</div><div class="test-status">passed</div><div class="test-duration">0.007s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">CRUD Operations Integration Tests &gt; Vaccins CRUD</div><div class="test-title">should delete a vaccin</div><div class="test-status">passed</div><div class="test-duration">0.007s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">CRUD Operations Integration Tests &gt; Traitements CRUD</div><div class="test-title">should create a new traitement</div><div class="test-status">passed</div><div class="test-duration">0.007s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">CRUD Operations Integration Tests &gt; Traitements CRUD</div><div class="test-title">should read traitements for a membre</div><div class="test-status">passed</div><div class="test-duration">0.007s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">CRUD Operations Integration Tests &gt; Traitements CRUD</div><div class="test-title">should update a traitement</div><div class="test-status">passed</div><div class="test-duration">0.007s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">CRUD Operations Integration Tests &gt; Traitements CRUD</div><div class="test-title">should mark a traitement as inactive</div><div class="test-status">passed</div><div class="test-duration">0.01s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">CRUD Operations Integration Tests &gt; Traitements CRUD</div><div class="test-title">should delete a traitement</div><div class="test-status">passed</div><div class="test-duration">0.009s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">CRUD Operations Integration Tests &gt; Complex queries</div><div class="test-title">should get membre with all related data</div><div class="test-status">passed</div><div class="test-duration">0.01s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">CRUD Operations Integration Tests &gt; Complex queries</div><div class="test-title">should handle transaction for creating membre with initial data</div><div class="test-status">passed</div><div class="test-duration">0.047s</div></div></div></div></details><details id="suite-5" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">C:\Users\RK\Desktop\CareLink DEV\CareLink\src\__tests__\dbHelper.test.ts</div><div class="suite-time">1.979s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">DBHelper &gt; query method</div><div class="test-title">should execute a successful query</div><div class="test-status">passed</div><div class="test-duration">0.258s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">DBHelper &gt; query method</div><div class="test-title">should handle query errors</div><div class="test-status">passed</div><div class="test-duration">0.077s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">DBHelper &gt; query method</div><div class="test-title">should retry on failure</div><div class="test-status">passed</div><div class="test-duration">0.031s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">DBHelper &gt; query method</div><div class="test-title">should handle silent mode</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">DBHelper &gt; select method</div><div class="test-title">should build correct SELECT query</div><div class="test-status">passed</div><div class="test-duration">0.009s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">DBHelper &gt; select method</div><div class="test-title">should handle SELECT without WHERE clause</div><div class="test-status">passed</div><div class="test-duration">0.008s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">DBHelper &gt; insert method</div><div class="test-title">should build correct INSERT query</div><div class="test-status">passed</div><div class="test-duration">0.007s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">DBHelper &gt; update method</div><div class="test-title">should build correct UPDATE query</div><div class="test-status">passed</div><div class="test-duration">0.015s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">DBHelper &gt; delete method</div><div class="test-title">should build correct DELETE query</div><div class="test-status">passed</div><div class="test-duration">0.016s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">DBHelper &gt; isConnected method</div><div class="test-title">should return true when connection is OK</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">DBHelper &gt; isConnected method</div><div class="test-title">should return false when connection fails</div><div class="test-status">passed</div><div class="test-duration">0.003s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">DBHelper &gt; transaction method</div><div class="test-title">should execute all queries in sequence</div><div class="test-status">passed</div><div class="test-duration">0.028s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">DBHelper &gt; transaction method</div><div class="test-title">should stop on first error</div><div class="test-status">passed</div><div class="test-duration">0.014s</div></div></div></div></details><details id="suite-6" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">C:\Users\RK\Desktop\CareLink DEV\CareLink\src\__tests__\logger.test.ts</div><div class="suite-time">0.724s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Logger &gt; Logging methods</div><div class="test-title">should log debug messages</div><div class="test-status">passed</div><div class="test-duration">0.031s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Logger &gt; Logging methods</div><div class="test-title">should log info messages</div><div class="test-status">passed</div><div class="test-duration">0.007s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Logger &gt; Logging methods</div><div class="test-title">should log warning messages</div><div class="test-status">passed</div><div class="test-duration">0.011s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Logger &gt; Logging methods</div><div class="test-title">should log error messages</div><div class="test-status">passed</div><div class="test-duration">0.005s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Logger &gt; Log filtering</div><div class="test-title">should filter logs by level</div><div class="test-status">passed</div><div class="test-duration">0.016s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Logger &gt; Log filtering</div><div class="test-title">should filter logs by module</div><div class="test-status">passed</div><div class="test-duration">0.046s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Logger &gt; Export functionality</div><div class="test-title">should export logs as JSON</div><div class="test-status">passed</div><div class="test-duration">0.02s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Logger &gt; Export functionality</div><div class="test-title">should export logs as text</div><div class="test-status">passed</div><div class="test-duration">0.012s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Logger &gt; Statistics</div><div class="test-title">should calculate correct statistics</div><div class="test-status">passed</div><div class="test-duration">0.015s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Logger &gt; Configuration</div><div class="test-title">should respect max logs limit</div><div class="test-status">passed</div><div class="test-duration">0.018s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Logger &gt; Configuration</div><div class="test-title">should toggle console output</div><div class="test-status">passed</div><div class="test-duration">0.01s</div></div></div></div></details><details id="suite-7" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">C:\Users\RK\Desktop\CareLink DEV\CareLink\tests\aiConfigLoader.test.ts</div><div class="suite-time">2.98s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">aiConfigLoader &gt; loadAIConfigsFromStorage</div><div class="test-title">should load and restore saved configurations</div><div class="test-status">passed</div><div class="test-duration">0.14s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">aiConfigLoader &gt; loadAIConfigsFromStorage</div><div class="test-title">should handle empty storage</div><div class="test-status">passed</div><div class="test-duration">0.005s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">aiConfigLoader &gt; loadAIConfigsFromStorage</div><div class="test-title">should handle storage error</div><div class="test-status">passed</div><div class="test-duration">0.007s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">aiConfigLoader &gt; loadAIConfigsFromStorage</div><div class="test-title">should handle JSON parse error</div><div class="test-status">passed</div><div class="test-duration">0.006s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">aiConfigLoader &gt; loadAIConfigsFromStorage</div><div class="test-title">should handle non-array data</div><div class="test-status">passed</div><div class="test-duration">0.006s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">aiConfigLoader &gt; isAIConfigured</div><div class="test-title">should return true when active configs exist</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">aiConfigLoader &gt; isAIConfigured</div><div class="test-title">should return false when no configs exist</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">aiConfigLoader &gt; isAIConfigured</div><div class="test-title">should return false when all configs are inactive</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">aiConfigLoader &gt; getPrimaryConfig</div><div class="test-title">should return config with highest priority</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">aiConfigLoader &gt; getPrimaryConfig</div><div class="test-title">should ignore inactive configs</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">aiConfigLoader &gt; getPrimaryConfig</div><div class="test-title">should return null when no active configs</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">aiConfigLoader &gt; getPrimaryConfig</div><div class="test-title">should handle configs without priority (default 50)</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div></div></details><details id="suite-8" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">C:\Users\RK\Desktop\CareLink DEV\CareLink\tests\ollamaInstaller.test.ts</div><div class="suite-time">4.96s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">OllamaInstaller &gt; isInstalled()</div><div class="test-title">should return true when Ollama is running</div><div class="test-status">passed</div><div class="test-duration">0.024s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">OllamaInstaller &gt; isInstalled()</div><div class="test-title">should return false when Ollama is not running</div><div class="test-status">passed</div><div class="test-duration">0.003s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">OllamaInstaller &gt; isInstalled()</div><div class="test-title">should timeout after 2 seconds</div><div class="test-status">passed</div><div class="test-duration">3.01s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">OllamaInstaller &gt; getInstalledModels()</div><div class="test-title">should return list of installed models</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">OllamaInstaller &gt; getInstalledModels()</div><div class="test-title">should return empty array when no models installed</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">OllamaInstaller &gt; getInstalledModels()</div><div class="test-title">should return empty array on error</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">OllamaInstaller &gt; hasModel()</div><div class="test-title">should return true when model is installed</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">OllamaInstaller &gt; hasModel()</div><div class="test-title">should return false when model is not installed</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">OllamaInstaller &gt; openDownloadPage()</div><div class="test-title">should open Windows download page on Windows</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">OllamaInstaller &gt; openDownloadPage()</div><div class="test-title">should open Mac download page on macOS</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">OllamaInstaller &gt; openDownloadPage()</div><div class="test-title">should open generic download page on Linux</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">OllamaInstaller &gt; getInstallInstructions()</div><div class="test-title">should return Windows instructions on Windows</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">OllamaInstaller &gt; getInstallInstructions()</div><div class="test-title">should return macOS instructions on Mac</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">OllamaInstaller &gt; getInstallInstructions()</div><div class="test-title">should return Linux instructions on Linux</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">OllamaInstaller &gt; waitForOllama()</div><div class="test-title">should return true when Ollama becomes available</div><div class="test-status">passed</div><div class="test-duration">0.221s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">OllamaInstaller &gt; waitForOllama()</div><div class="test-title">should return false after max retries</div><div class="test-status">passed</div><div class="test-duration">0.187s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">OllamaInstaller &gt; getRecommendedModels()</div><div class="test-title">should return list of medical models</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">OllamaInstaller &gt; getOllamaVersion()</div><div class="test-title">should return version when available</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">OllamaInstaller &gt; getOllamaVersion()</div><div class="test-title">should return null on error</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">OllamaInstaller &gt; testModel()</div><div class="test-title">should return success when model responds</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">OllamaInstaller &gt; testModel()</div><div class="test-title">should return error on HTTP error</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">OllamaInstaller &gt; testModel()</div><div class="test-title">should return error on network error</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">OllamaInstaller &gt; getModelDownloadInstructions()</div><div class="test-title">should return instructions for specific model</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">OllamaInstaller &gt; getModelDownloadInstructions()</div><div class="test-title">should use default model if not specified</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div></div></details></main></body></html>

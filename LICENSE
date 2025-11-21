@@ -1,0 +1,73 @@
+# Business Source License 1.1 (BSL 1.1)
+
+## CareLink - Licence d'Utilisation
+
+**Licenseur :** VIEY David
+**Logiciel :** CareLink v2.5.0
+**Date de Licence :** 21 novembre 2025
+**Date de Conversion Open Source :** 21 novembre 2029
+**Licence de Conversion :** Apache License 2.0
+
+---
+
+## CONDITIONS D'UTILISATION
+
+### Usage Gratuit Autorisé
+
+Vous pouvez utiliser, copier, modifier et redistribuer ce logiciel **GRATUITEMENT** pour :
+
+- **Usage personnel** - Gestion de votre santé familiale
+- **Usage éducatif** - Apprentissage, recherche académique
+- **Usage associatif** - Associations à but non lucratif
+- **Organisations de santé publique** - Hôpitaux publics, EHPAD publics
+- **Développement et contribution** - Amélioration du logiciel
+
+### Usage Commercial (Licence Payante Requise)
+
+Une **licence commerciale** est requise pour :
+
+- Entreprises privées de plus de 10 employés
+- Cliniques et cabinets privés
+- Laboratoires pharmaceutiques
+- Assurances et mutuelles privées
+- Revente ou intégration dans un produit commercial
+- Services SaaS basés sur ce logiciel
+
+**Contact pour licence commerciale :** [Voir page Contact sur le site]
+
+---
+
+## DROITS ACCORDÉS
+
+Sous réserve des conditions ci-dessus, vous avez le droit de :
+
+1. **Utiliser** le logiciel
+2. **Copier** le logiciel
+3. **Modifier** le code source
+4. **Distribuer** vos modifications (sous cette même licence)
+5. **Créer des œuvres dérivées**
+
+---
+
+## LIMITATIONS
+
+- Aucune garantie n'est fournie
+- Le licenseur n'est pas responsable des dommages
+- Vous devez conserver cette notice de licence
+- Vous devez créditer l'auteur original
+
+---
+
+## CONVERSION OPEN SOURCE
+
+Le 21 novembre 2029, ce logiciel sera automatiquement converti sous **Apache License 2.0**, permettant un usage commercial libre pour tous.
+
+---
+
+## CONTACT
+
+Pour toute question sur cette licence ou pour obtenir une licence commerciale, contactez le développeur via le site officiel CareLink.
+
+---
+
+Copyright (c) 2025 VIEY David - Tous droits réservés selon les termes ci-dessus.

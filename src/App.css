@@ -1,0 +1,484 @@
+/* Styles spécifiques à l'application */
+
+.app {
+  min-height: 100vh;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card, .membre-card, .widget {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Utilitaires */
+.text-center {
+  text-align: center;
+}
+
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+.mt-4 { margin-top: 2rem; }
+
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+.mb-4 { margin-bottom: 2rem; }
+
+/* ========== VACCINS PAGE - USER FRIENDLY ========== */
+
+/* Header avec bouton inline */
+.card-header-inline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.card-header-inline h3 {
+  margin: 0;
+}
+
+/* Empty state avec icône */
+.empty-state-box {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: var(--card-bg, #f8f9fa);
+  border-radius: 12px;
+  border: 2px dashed var(--border-color, #dee2e6);
+}
+
+.empty-state-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.empty-state-text {
+  font-size: 1.1rem;
+  color: var(--text-secondary, #6c757d);
+  margin-bottom: 1.5rem;
+}
+
+/* Liste des vaccins */
+.vaccins-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.vaccin-item {
+  padding: 1.25rem;
+  border-radius: 12px;
+  background: var(--card-bg, #ffffff);
+  border: 2px solid var(--border-color, #dee2e6);
+  transition: all 0.2s ease;
+}
+
+.vaccin-item:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.vaccin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.vaccin-nom {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.1rem;
+}
+
+.statut-badge {
+  font-size: 1.5rem;
+}
+
+.btn-delete-small {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+  padding: 0.25rem;
+}
+
+.btn-delete-small:hover {
+  opacity: 1;
+}
+
+.vaccin-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.95rem;
+  color: var(--text-secondary, #6c757d);
+  margin-bottom: 0.5rem;
+}
+
+.vaccin-notes {
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  background: var(--bg-secondary, #f8f9fa);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: var(--text-primary, #212529);
+  border-left: 3px solid var(--primary-color, #007bff);
+}
+
+/* Statuts colorés */
+.statut-fait {
+  border-color: #28a745 !important;
+}
+
+.statut-a-faire {
+  border-color: #ffc107 !important;
+}
+
+.statut-rappel {
+  border-color: #17a2b8 !important;
+}
+
+.statut-expire {
+  border-color: #dc3545 !important;
+}
+
+/* ========== TIP BOXES - USER FRIENDLY ========== */
+
+.tip-box {
+  display: flex;
+  gap: 1rem;
+  padding: 1.25rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  border-left: 4px solid;
+  background: var(--card-bg, #ffffff);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.tip-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.tip-content {
+  flex: 1;
+}
+
+.tip-content strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 1.05rem;
+}
+
+.tip-content p {
+  margin: 0;
+  line-height: 1.6;
+  color: var(--text-secondary, #6c757d);
+}
+
+.tip-list {
+  margin: 0.75rem 0 0 0;
+  padding-left: 1.5rem;
+  color: var(--text-secondary, #6c757d);
+}
+
+.tip-list li {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+/* Variantes de tips */
+.tip-info {
+  border-left-color: #17a2b8;
+  background: #d1ecf1;
+}
+
+.tip-success {
+  border-left-color: #28a745;
+  background: #d4edda;
+}
+
+.tip-warning {
+  border-left-color: #ffc107;
+  background: #fff3cd;
+}
+
+.tip-danger {
+  border-left-color: #dc3545;
+  background: #f8d7da;
+}
+
+/* ========== CALENDRIER VACCINAL ========== */
+
+.calendar-category {
+  margin-bottom: 2.5rem;
+}
+
+.category-title {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border-color, #dee2e6);
+  color: var(--text-primary, #212529);
+}
+
+.calendar-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.calendar-item {
+  padding: 1.25rem;
+  border-radius: 12px;
+  background: var(--card-bg, #ffffff);
+  border: 1px solid var(--border-color, #dee2e6);
+  transition: all 0.2s ease;
+}
+
+.calendar-item:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.calendar-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.calendar-item-nom {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.05rem;
+}
+
+.badge-obligatoire {
+  background: #dc3545;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-add-calendar {
+  background: var(--primary-color, #007bff);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-add-calendar:hover {
+  background: var(--primary-dark, #0056b3);
+  transform: scale(1.05);
+}
+
+.calendar-description {
+  color: var(--text-secondary, #6c757d);
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+}
+
+.calendar-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary, #6c757d);
+  margin-bottom: 0.5rem;
+}
+
+.calendar-info {
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  background: var(--bg-secondary, #f8f9fa);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: var(--text-primary, #212529);
+}
+
+.calendar-footer {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color, #dee2e6);
+  text-align: center;
+}
+
+.calendar-source {
+  font-size: 0.85rem;
+  color: var(--text-secondary, #6c757d);
+  font-style: italic;
+  margin: 0;
+}
+
+/* ========== RENDEZ-VOUS PAGE - USER FRIENDLY ========== */
+
+/* Organisation par périodes */
+.rdv-periode {
+  margin-bottom: 2rem;
+}
+
+.periode-title {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border-color, #dee2e6);
+  color: var(--text-primary, #212529);
+  font-weight: 600;
+}
+
+/* Cartes RDV */
+.rdv-item {
+  padding: 1.25rem;
+  border-radius: 12px;
+  background: var(--card-bg, #ffffff);
+  border: 2px solid var(--border-color, #dee2e6);
+  transition: all 0.2s ease;
+  margin-bottom: 1rem;
+}
+
+.rdv-item:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+/* Statuts colorés */
+.rdv-a-venir {
+  border-left: 4px solid #007bff;
+}
+
+.rdv-effectue {
+  border-left: 4px solid #28a745;
+  opacity: 0.8;
+}
+
+.rdv-annule {
+  border-left: 4px solid #dc3545;
+  opacity: 0.7;
+}
+
+/* Alertes proximité */
+.rdv-aujourdhui {
+  border-color: #dc3545 !important;
+  background: #fff5f5 !important;
+}
+
+.rdv-demain {
+  border-color: #fd7e14 !important;
+  background: #fff8f0 !important;
+}
+
+.rdv-proche {
+  border-color: #ffc107 !important;
+  background: #fffef0 !important;
+}
+
+/* ========== PROFIL MEMBRE PAGE - USER FRIENDLY ========== */
+
+/* Mini listes dans le profil */
+.vaccins-mini-list,
+.traitements-mini-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.vaccin-mini-item,
+.traitement-mini-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background: var(--bg-secondary, #f8f9fa);
+  border-radius: 8px;
+  border-left: 3px solid var(--primary-color, #007bff);
+}
+
+.vaccin-nom,
+.traitement-nom {
+  font-weight: 600;
+  color: var(--text-primary, #212529);
+}
+
+.vaccin-date,
+.traitement-details {
+  font-size: 0.9rem;
+  color: var(--text-secondary, #6c757d);
+}
+
+/* Allergies */
+.allergies-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.allergie-item {
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 4px solid;
+  background: var(--bg-secondary, #f8f9fa);
+}
+
+.allergie-item.severite-Grave {
+  border-left-color: #dc3545;
+  background: #fff5f5;
+}
+
+.allergie-item.severite-Modérée {
+  border-left-color: #fd7e14;
+  background: #fff8f0;
+}
+
+.allergie-item.severite-Légère {
+  border-left-color: #ffc107;
+  background: #fffef0;
+}
+
+.allergie-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.badge-severite {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: var(--primary-color, #007bff);
+  color: white;
+}
+
+/* Button small */
+.btn-small {
+  padding: 0.4rem 0.8rem !important;
+  font-size: 0.85rem !important;
+}

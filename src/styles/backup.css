@@ -1,0 +1,453 @@
+/**
+ * Styles pour la page Gestion des Backups
+ *
+ * Ce fichier contient tous les styles spécifiques à la page de gestion
+ * des backups de la base de données, incluant:
+ * - Cartes statistiques
+ * - Table des backups
+ * - Badges de type (auto/manual)
+ * - Actions et boutons
+ * - Modale de confirmation
+ * - Responsive design
+ *
+ * @author VIEY David
+ * @version 2.0.0
+ */
+
+/* ============================================================================
+   CONTENEUR PRINCIPAL
+   ============================================================================ */
+
+.backup-page {
+  padding: var(--spacing-lg);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ============================================================================
+   CARTES STATISTIQUES
+   ============================================================================ */
+
+.backup-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
+}
+
+.backup-stats .stat-card {
+  background: var(--card-background);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  text-align: center;
+  transition: all var(--transition-base);
+}
+
+.backup-stats .stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary);
+}
+
+.backup-stats .stat-icon {
+  font-size: 2.5rem;
+  margin-bottom: var(--spacing-sm);
+  display: block;
+}
+
+.backup-stats .stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.backup-stats .stat-label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.backup-stats .stat-detail {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: var(--spacing-xs);
+}
+
+/* ============================================================================
+   SECTION ACTIONS
+   ============================================================================ */
+
+.backup-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
+  align-items: center;
+}
+
+.backup-actions .btn {
+  min-width: 160px;
+}
+
+/* ============================================================================
+   TABLE DES BACKUPS
+   ============================================================================ */
+
+.backups-table-container {
+  background: var(--card-background);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.backups-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.backups-table thead {
+  background: var(--bg-secondary);
+  border-bottom: 2px solid var(--border-light);
+}
+
+.backups-table th {
+  padding: var(--spacing-md);
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.backups-table tbody tr {
+  border-bottom: 1px solid var(--border-light);
+  transition: background-color var(--transition-fast);
+}
+
+.backups-table tbody tr:hover {
+  background: var(--bg-secondary);
+}
+
+.backups-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.backups-table td {
+  padding: var(--spacing-md);
+  color: var(--text-primary);
+}
+
+/* ============================================================================
+   BADGES DE TYPE
+   ============================================================================ */
+
+.backup-type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.backup-type-badge.type-auto {
+  background: var(--bg-info);
+  color: var(--info);
+  border: 1px solid var(--info);
+}
+
+.backup-type-badge.type-manual {
+  background: var(--bg-success);
+  color: var(--success);
+  border: 1px solid var(--success);
+}
+
+/* ============================================================================
+   ACTIONS SUR LES BACKUPS
+   ============================================================================ */
+
+.backup-item-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+  align-items: center;
+}
+
+.backup-item-actions .btn {
+  min-width: auto;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: 0.85rem;
+}
+
+.backup-item-actions .btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ============================================================================
+   ÉTAT VIDE
+   ============================================================================ */
+
+.backups-empty {
+  text-align: center;
+  padding: var(--spacing-2xl);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  border: 2px dashed var(--border-light);
+}
+
+.backups-empty .empty-icon {
+  font-size: 4rem;
+  margin-bottom: var(--spacing-md);
+  opacity: 0.5;
+}
+
+.backups-empty h3 {
+  font-size: 1.25rem;
+  margin-bottom: var(--spacing-sm);
+  color: var(--text-primary);
+}
+
+.backups-empty p {
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-lg);
+}
+
+/* ============================================================================
+   MODALE DE CONFIRMATION
+   ============================================================================ */
+
+.backup-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: var(--spacing-lg);
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.backup-modal {
+  background: var(--card-background);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  max-width: 500px;
+  width: 100%;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.backup-modal-header {
+  padding: var(--spacing-lg);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.backup-modal-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.backup-modal-body {
+  padding: var(--spacing-lg);
+}
+
+.backup-modal-body p {
+  margin: 0 0 var(--spacing-md) 0;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.backup-modal-warning {
+  background: var(--bg-warning);
+  border: 1px solid var(--warning);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.backup-modal-warning-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.backup-modal-warning-content {
+  flex: 1;
+}
+
+.backup-modal-warning strong {
+  display: block;
+  margin-bottom: var(--spacing-xs);
+  color: var(--warning);
+}
+
+.backup-modal-warning p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.backup-modal-footer {
+  padding: var(--spacing-lg);
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-sm);
+}
+
+/* ============================================================================
+   LOADING SPINNER
+   ============================================================================ */
+
+.backup-loading {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.backup-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--border-light);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================ */
+
+@media (max-width: 768px) {
+  .backup-page {
+    padding: var(--spacing-md);
+  }
+
+  .backup-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .backup-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .backup-actions .btn {
+    width: 100%;
+  }
+
+  /* Table responsive - mode carte */
+  .backups-table-container {
+    overflow-x: auto;
+  }
+
+  .backups-table {
+    min-width: 600px;
+  }
+
+  .backup-item-actions {
+    flex-direction: column;
+  }
+
+  .backup-item-actions .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .backup-stats .stat-icon {
+    font-size: 2rem;
+  }
+
+  .backup-stats .stat-value {
+    font-size: 1.5rem;
+  }
+
+  .backup-modal {
+    max-width: 100%;
+    margin: var(--spacing-md);
+  }
+}
+
+/* ============================================================================
+   ÉTATS DE CHARGEMENT
+   ============================================================================ */
+
+.backup-loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-lg);
+  z-index: 10;
+}
+
+.backup-loading-overlay.dark-mode {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+/* ============================================================================
+   ANIMATIONS
+   ============================================================================ */
+
+.backup-item-enter {
+  animation: slideInRight 0.3s ease;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.backup-item-exit {
+  animation: fadeOut 0.3s ease;
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}

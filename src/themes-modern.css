@@ -1,0 +1,833 @@
+/**
+ * ==========================================
+ * SYSTÈME DE THÈMES ULTRA-MODERNE - CARELINK
+ * ==========================================
+ *
+ * Ce fichier redéfinit complètement le système de thèmes de CareLink
+ * avec une approche moderne où chaque thème a une personnalité unique
+ *
+ * NOUVEAUTÉS PAR THÈME:
+ * - Polices personnalisées (font-family différentes)
+ * - Animations et transitions uniques
+ * - Effets visuels distincts (glassmorphisme, néomorphisme, etc.)
+ * - Espacements et bordures adaptés
+ * - Ombres et profondeurs personnalisées
+ * - Interactions hover spécifiques
+ *
+ * THÈMES SPÉCIALISÉS:
+ * 1. Médical Pro - Ultra professionnel pour cabinets médicaux
+ * 2. Sénior - Grandes polices, contraste élevé, simplicité
+ * 3. Nuit - Optimisé pour utilisation nocturne
+ * 4. Accessibilité - WCAG AAA, haute lisibilité
+ * 5. Moderne - Design cutting-edge avec animations fluides
+ * 6. Minimaliste - Épuré et zen
+ */
+
+/* ==========================================
+   IMPORTS DE POLICES
+   ========================================== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap');
+
+/* ==========================================
+   THÈME 1: MÉDICAL PRO
+   Design ultra-professionnel pour cabinets
+   ========================================== */
+[data-theme="medical-pro"] {
+  /* Couleurs professionnelles médicales */
+  --primary-50: #E6F7FF;
+  --primary-100: #BAE7FF;
+  --primary-500: #1890FF;
+  --primary-600: #0050B3;
+  --primary-700: #003A8C;
+
+  --success-50: #F6FFED;
+  --success-500: #52C41A;
+  --success-600: #389E0D;
+
+  --warning-50: #FFFBE6;
+  --warning-500: #FAAD14;
+
+  --error-50: #FFF1F0;
+  --error-500: #F5222D;
+
+  --info-50: #E6F7FF;
+  --info-500: #1890FF;
+
+  --bg-primary: #FAFBFC;
+  --bg-secondary: #F5F7FA;
+  --bg-tertiary: #FFFFFF;
+  --bg-hover: #EFF3F8;
+
+  --text-primary: #1A202E;
+  --text-secondary: #4A5568;
+  --text-tertiary: #718096;
+  --text-on-primary: #FFFFFF;
+
+  --border-light: #E2E8F0;
+  --border-medium: #CBD5E0;
+  --border-dark: #A0AEC0;
+
+  --sidebar-gradient-start: #003A8C;
+  --sidebar-gradient-end: #0050B3;
+
+  /* Typographie professionnelle */
+  --font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-size-base: 15px;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 600;
+  --line-height: 1.6;
+  --letter-spacing: -0.01em;
+
+  /* Espacements professionnels */
+  --spacing-unit: 4px;
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+
+  /* Bordures nettes et professionnelles */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-full: 9999px;
+  --border-width: 1px;
+  --border-style: solid;
+
+  /* Ombres subtiles et professionnelles */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.10);
+  --shadow-xl: 0 16px 32px rgba(0, 0, 0, 0.12);
+  --shadow-focus: 0 0 0 3px rgba(24, 144, 255, 0.15);
+
+  /* Transitions professionnelles */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.6, 1);
+  --transition-base: 200ms cubic-bezier(0.4, 0, 0.6, 1);
+  --transition-slow: 300ms cubic-bezier(0.4, 0, 0.6, 1);
+  --transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+
+  /* Effets professionnels */
+  --hover-brightness: 0.98;
+  --hover-scale: 1.01;
+  --active-scale: 0.99;
+  --disabled-opacity: 0.5;
+  --backdrop-blur: 8px;
+}
+
+/* ==========================================
+   THÈME 2: SÉNIOR
+   Optimisé pour personnes âgées
+   ========================================== */
+[data-theme="senior"] {
+  /* Couleurs à fort contraste */
+  --primary-50: #F0F4FF;
+  --primary-100: #DBE4FF;
+  --primary-500: #364FC7;
+  --primary-600: #2C3E8C;
+  --primary-700: #1C2A5B;
+
+  --success-50: #EDFCF2;
+  --success-500: #27AE60;
+  --success-600: #229954;
+
+  --warning-50: #FFF9E6;
+  --warning-500: #F39C12;
+
+  --error-50: #FFEBEE;
+  --error-500: #C0392B;
+
+  --info-50: #E3F2FD;
+  --info-500: #2196F3;
+
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F7F8FA;
+  --bg-tertiary: #FFFFFF;
+  --bg-hover: #E8EBF0;
+
+  --text-primary: #000000;
+  --text-secondary: #333333;
+  --text-tertiary: #555555;
+  --text-on-primary: #FFFFFF;
+
+  --border-light: #D1D5DB;
+  --border-medium: #9CA3AF;
+  --border-dark: #6B7280;
+
+  --sidebar-gradient-start: #1C2A5B;
+  --sidebar-gradient-end: #2C3E8C;
+
+  /* Typographie grande et claire */
+  --font-family: 'Lexend', 'Arial', sans-serif;
+  --font-size-base: 18px;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+  --line-height: 1.8;
+  --letter-spacing: 0.02em;
+
+  /* Espacements généreux */
+  --spacing-unit: 6px;
+  --spacing-xs: 6px;
+  --spacing-sm: 12px;
+  --spacing-md: 24px;
+  --spacing-lg: 36px;
+  --spacing-xl: 48px;
+  --spacing-2xl: 72px;
+
+  /* Bordures très visibles */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+  --border-width: 2px;
+  --border-style: solid;
+
+  /* Ombres prononcées pour profondeur */
+  --shadow-xs: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.12);
+  --shadow-md: 0 6px 12px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.18);
+  --shadow-xl: 0 24px 48px rgba(0, 0, 0, 0.20);
+  --shadow-focus: 0 0 0 4px rgba(54, 79, 199, 0.3);
+
+  /* Transitions lentes et douces */
+  --transition-fast: 200ms ease-in-out;
+  --transition-base: 300ms ease-in-out;
+  --transition-slow: 400ms ease-in-out;
+  --transition-property: all;
+
+  /* Effets simples */
+  --hover-brightness: 1.05;
+  --hover-scale: 1.03;
+  --active-scale: 0.98;
+  --disabled-opacity: 0.4;
+  --backdrop-blur: 4px;
+}
+
+/* ==========================================
+   THÈME 3: NUIT
+   Optimisé pour utilisation nocturne
+   ========================================== */
+[data-theme="night"] {
+  /* Couleurs douces pour les yeux */
+  --primary-50: #1A1F2E;
+  --primary-100: #2D3548;
+  --primary-500: #818CF8;
+  --primary-600: #6366F1;
+  --primary-700: #4F46E5;
+
+  --success-50: #0F2922;
+  --success-500: #4ADE80;
+  --success-600: #22C55E;
+
+  --warning-50: #2D2006;
+  --warning-500: #FCD34D;
+
+  --error-50: #2D0F0F;
+  --error-500: #F87171;
+
+  --info-50: #0F1E2E;
+  --info-500: #60A5FA;
+
+  --bg-primary: #0F1419;
+  --bg-secondary: #1A1F2E;
+  --bg-tertiary: #232937;
+  --bg-hover: #2D3548;
+
+  --text-primary: #E2E8F0;
+  --text-secondary: #A0AEC0;
+  --text-tertiary: #718096;
+  --text-on-primary: #FFFFFF;
+
+  --border-light: #2D3748;
+  --border-medium: #4A5568;
+  --border-dark: #718096;
+
+  --sidebar-gradient-start: #0F1419;
+  --sidebar-gradient-end: #1A1F2E;
+
+  /* Typographie optimisée pour lecture nocturne */
+  --font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-size-base: 15px;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+  --line-height: 1.7;
+  --letter-spacing: 0.01em;
+
+  /* Espacements confortables */
+  --spacing-unit: 4px;
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+
+  /* Bordures douces */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
+  --border-width: 1px;
+  --border-style: solid;
+
+  /* Ombres subtiles avec lueur douce */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.6);
+  --shadow-xl: 0 16px 32px rgba(0, 0, 0, 0.7);
+  --shadow-focus: 0 0 0 3px rgba(129, 140, 248, 0.3);
+  --shadow-glow: 0 0 20px rgba(129, 140, 248, 0.2);
+
+  /* Transitions fluides */
+  --transition-fast: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-property: all;
+
+  /* Effets nocturnes */
+  --hover-brightness: 1.1;
+  --hover-scale: 1.02;
+  --active-scale: 0.98;
+  --disabled-opacity: 0.3;
+  --backdrop-blur: 12px;
+}
+
+/* ==========================================
+   THÈME 4: ACCESSIBILITÉ
+   WCAG AAA Compliant
+   ========================================== */
+[data-theme="accessibility"] {
+  /* Couleurs haute accessibilité */
+  --primary-50: #F5F3FF;
+  --primary-100: #EDE9FE;
+  --primary-500: #5B21B6;
+  --primary-600: #4C1D95;
+  --primary-700: #3B0E79;
+
+  --success-50: #F0FDF4;
+  --success-500: #15803D;
+  --success-600: #14532D;
+
+  --warning-50: #FEFCE8;
+  --warning-500: #A16207;
+
+  --error-50: #FEF2F2;
+  --error-500: #991B1B;
+
+  --info-50: #EFF6FF;
+  --info-500: #1E40AF;
+
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #FAFAFA;
+  --bg-tertiary: #FFFFFF;
+  --bg-hover: #F3F4F6;
+
+  --text-primary: #000000;
+  --text-secondary: #1F2937;
+  --text-tertiary: #374151;
+  --text-on-primary: #FFFFFF;
+
+  --border-light: #374151;
+  --border-medium: #1F2937;
+  --border-dark: #111827;
+
+  --sidebar-gradient-start: #3B0E79;
+  --sidebar-gradient-end: #4C1D95;
+
+  /* Typographie haute lisibilité */
+  --font-family: 'Atkinson Hyperlegible', 'Arial', sans-serif;
+  --font-size-base: 16px;
+  --font-weight-normal: 400;
+  --font-weight-medium: 600;
+  --font-weight-bold: 700;
+  --line-height: 1.75;
+  --letter-spacing: 0.03em;
+
+  /* Espacements clairs */
+  --spacing-unit: 4px;
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+
+  /* Bordures très visibles */
+  --radius-sm: 0;
+  --radius-md: 2px;
+  --radius-lg: 4px;
+  --radius-xl: 8px;
+  --radius-full: 9999px;
+  --border-width: 3px;
+  --border-style: solid;
+
+  /* Ombres fortes pour distinction */
+  --shadow-xs: 0 0 0 2px rgba(0, 0, 0, 0.2);
+  --shadow-sm: 0 0 0 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 0 0 4px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 0 0 5px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 0 0 6px rgba(0, 0, 0, 0.6);
+  --shadow-focus: 0 0 0 4px rgba(91, 33, 182, 0.5);
+
+  /* Transitions prévisibles */
+  --transition-fast: 100ms linear;
+  --transition-base: 150ms linear;
+  --transition-slow: 200ms linear;
+  --transition-property: opacity, transform;
+
+  /* Effets minimaux */
+  --hover-brightness: 1;
+  --hover-scale: 1;
+  --active-scale: 1;
+  --disabled-opacity: 0.6;
+  --backdrop-blur: 0;
+}
+
+/* ==========================================
+   THÈME 5: MODERNE
+   Design cutting-edge avec animations
+   ========================================== */
+[data-theme="modern"] {
+  /* Couleurs vibrantes et modernes */
+  --primary-50: #FFF4FE;
+  --primary-100: #FCE7FB;
+  --primary-500: #D946EF;
+  --primary-600: #C026D3;
+  --primary-700: #A21CAF;
+
+  --success-50: #F0FDF4;
+  --success-500: #22D3EE;
+  --success-600: #06B6D4;
+
+  --warning-50: #FFF7ED;
+  --warning-500: #F97316;
+
+  --error-50: #FFF1F2;
+  --error-500: #F43F5E;
+
+  --info-50: #F0F9FF;
+  --info-500: #3B82F6;
+
+  --bg-primary: #FAFBFF;
+  --bg-secondary: #F5F3FF;
+  --bg-tertiary: #FFFFFF;
+  --bg-hover: #EDE9FE;
+
+  --text-primary: #1E1B4B;
+  --text-secondary: #4C4B63;
+  --text-tertiary: #6B7280;
+  --text-on-primary: #FFFFFF;
+
+  --border-light: #E9D5FF;
+  --border-medium: #D8B4FE;
+  --border-dark: #C084FC;
+
+  --sidebar-gradient-start: #7C3AED;
+  --sidebar-gradient-end: #A855F7;
+
+  /* Typographie moderne */
+  --font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-size-base: 15px;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+  --line-height: 1.5;
+  --letter-spacing: -0.02em;
+
+  /* Espacements dynamiques */
+  --spacing-unit: 4px;
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+
+  /* Bordures modernes et arrondies */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+  --border-width: 2px;
+  --border-style: solid;
+
+  /* Ombres colorées et glassmorphisme */
+  --shadow-xs: 0 4px 6px -1px rgba(217, 70, 239, 0.1);
+  --shadow-sm: 0 6px 12px -2px rgba(217, 70, 239, 0.15);
+  --shadow-md: 0 10px 20px -3px rgba(217, 70, 239, 0.2);
+  --shadow-lg: 0 20px 40px -4px rgba(217, 70, 239, 0.25);
+  --shadow-xl: 0 30px 60px -5px rgba(217, 70, 239, 0.3);
+  --shadow-focus: 0 0 0 4px rgba(217, 70, 239, 0.2);
+  --shadow-glow: 0 0 30px rgba(217, 70, 239, 0.4);
+  --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+
+  /* Transitions élastiques et dynamiques */
+  --transition-fast: 200ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --transition-base: 350ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --transition-slow: 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --transition-property: all;
+
+  /* Effets modernes */
+  --hover-brightness: 1.05;
+  --hover-scale: 1.05;
+  --active-scale: 0.95;
+  --disabled-opacity: 0.4;
+  --backdrop-blur: 20px;
+  --glass-opacity: 0.8;
+  --glass-blur: 10px;
+}
+
+/* ==========================================
+   THÈME 6: MINIMALISTE
+   Épuré et zen
+   ========================================== */
+[data-theme="minimalist"] {
+  /* Palette monochrome minimaliste */
+  --primary-50: #FAFAFA;
+  --primary-100: #F4F4F5;
+  --primary-500: #18181B;
+  --primary-600: #09090B;
+  --primary-700: #000000;
+
+  --success-50: #FAFAFA;
+  --success-500: #18181B;
+  --success-600: #09090B;
+
+  --warning-50: #FAFAFA;
+  --warning-500: #52525B;
+
+  --error-50: #FAFAFA;
+  --error-500: #27272A;
+
+  --info-50: #FAFAFA;
+  --info-500: #3F3F46;
+
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #FAFAFA;
+  --bg-tertiary: #FFFFFF;
+  --bg-hover: #F4F4F5;
+
+  --text-primary: #09090B;
+  --text-secondary: #27272A;
+  --text-tertiary: #52525B;
+  --text-on-primary: #FFFFFF;
+
+  --border-light: #E4E4E7;
+  --border-medium: #D4D4D8;
+  --border-dark: #A1A1AA;
+
+  --sidebar-gradient-start: #09090B;
+  --sidebar-gradient-end: #18181B;
+
+  /* Typographie épurée */
+  --font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-size-base: 14px;
+  --font-weight-normal: 300;
+  --font-weight-medium: 400;
+  --font-weight-bold: 600;
+  --line-height: 1.6;
+  --letter-spacing: 0;
+
+  /* Espacements zen */
+  --spacing-unit: 8px;
+  --spacing-xs: 8px;
+  --spacing-sm: 16px;
+  --spacing-md: 24px;
+  --spacing-lg: 32px;
+  --spacing-xl: 40px;
+  --spacing-2xl: 56px;
+
+  /* Bordures minimalistes */
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+  --radius-full: 9999px;
+  --border-width: 1px;
+  --border-style: solid;
+
+  /* Pas d'ombres */
+  --shadow-xs: none;
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
+  --shadow-xl: none;
+  --shadow-focus: 0 0 0 1px rgba(0, 0, 0, 0.1);
+
+  /* Transitions subtiles */
+  --transition-fast: 250ms ease;
+  --transition-base: 350ms ease;
+  --transition-slow: 450ms ease;
+  --transition-property: color, background-color;
+
+  /* Effets minimaux */
+  --hover-brightness: 1;
+  --hover-scale: 1;
+  --active-scale: 1;
+  --disabled-opacity: 0.5;
+  --backdrop-blur: 0;
+}
+
+/* ==========================================
+   STYLES GLOBAUX APPLIQUÉS PAR THÈME
+   ========================================== */
+
+/* Application des variables de typographie */
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height);
+  letter-spacing: var(--letter-spacing);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: var(--font-weight-bold);
+  letter-spacing: calc(var(--letter-spacing) * 0.8);
+}
+
+/* Application des espacements */
+.card {
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
+}
+
+/* Application des bordures et rayons */
+.btn-primary,
+.btn-secondary,
+.card,
+.form-group input,
+.form-group select,
+.form-group textarea {
+  border-radius: var(--radius-md);
+  border-width: var(--border-width);
+  border-style: var(--border-style);
+}
+
+/* Application des ombres */
+.card {
+  box-shadow: var(--shadow-sm);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.btn-primary {
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover {
+  box-shadow: var(--shadow-md);
+}
+
+/* Application des transitions */
+.btn-primary,
+.btn-secondary,
+.card,
+.sidebar-nav-item,
+.form-group input,
+.form-group select,
+.form-group textarea {
+  transition-property: var(--transition-property);
+  transition-duration: var(--transition-base);
+  transition-timing-function: inherit;
+}
+
+/* Effets hover selon le thème */
+.btn-primary:hover,
+.btn-secondary:hover {
+  transform: scale(var(--hover-scale));
+  filter: brightness(var(--hover-brightness));
+}
+
+.btn-primary:active,
+.btn-secondary:active {
+  transform: scale(var(--active-scale));
+}
+
+/* Disabled state */
+.btn-primary:disabled,
+.btn-secondary:disabled,
+input:disabled,
+select:disabled,
+textarea:disabled {
+  opacity: var(--disabled-opacity);
+  cursor: not-allowed;
+}
+
+/* Focus states avec ombres personnalisées */
+.btn-primary:focus,
+.btn-secondary:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  box-shadow: var(--shadow-focus);
+  outline: none;
+}
+
+/* ==========================================
+   EFFETS SPÉCIAUX PAR THÈME
+   ========================================== */
+
+/* Glassmorphisme pour le thème moderne */
+[data-theme="modern"] .card,
+[data-theme="modern"] .modal-container,
+[data-theme="modern"] .notification-dropdown {
+  background: rgba(255, 255, 255, var(--glass-opacity));
+  backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: var(--shadow-glass);
+}
+
+/* Néomorphisme pour le thème médical pro */
+[data-theme="medical-pro"] .card {
+  background: linear-gradient(145deg, #ffffff, #f3f5f7);
+  box-shadow: 20px 20px 60px #d1d5db, -20px -20px 60px #ffffff;
+}
+
+[data-theme="medical-pro"] .btn-primary {
+  background: linear-gradient(145deg, #1a94ff, #1578d6);
+  box-shadow: 5px 5px 10px #0d4a85, -5px -5px 10px #23b3ff;
+}
+
+/* Effets de lueur pour le thème nuit */
+[data-theme="night"] .btn-primary,
+[data-theme="night"] .sidebar-nav-item.active {
+  box-shadow: var(--shadow-glow);
+}
+
+[data-theme="night"] .card:hover {
+  box-shadow: 0 0 30px rgba(129, 140, 248, 0.15);
+}
+
+/* Animations spéciales pour le thème moderne */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.9; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes slideInFromLeft {
+  0% { transform: translateX(-100%); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInFromRight {
+  0% { transform: translateX(100%); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+[data-theme="modern"] .stat-card {
+  animation: float 3s ease-in-out infinite;
+  animation-delay: calc(var(--i) * 0.1s);
+}
+
+[data-theme="modern"] .notification-badge {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+[data-theme="modern"] .sidebar {
+  animation: slideInFromLeft 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+[data-theme="modern"] .topbar {
+  animation: slideInFromRight 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Pas d'animations pour le thème accessibilité */
+[data-theme="accessibility"] * {
+  animation: none !important;
+  transition: var(--transition-property) var(--transition-base) !important;
+}
+
+/* Bordures épaisses pour le thème sénior */
+[data-theme="senior"] .btn-primary,
+[data-theme="senior"] .btn-secondary,
+[data-theme="senior"] .card,
+[data-theme="senior"] input,
+[data-theme="senior"] select,
+[data-theme="senior"] textarea {
+  border-width: 2px;
+  font-weight: 500;
+}
+
+[data-theme="senior"] .btn-primary:focus,
+[data-theme="senior"] .btn-secondary:focus,
+[data-theme="senior"] input:focus,
+[data-theme="senior"] select:focus,
+[data-theme="senior"] textarea:focus {
+  border-width: 3px;
+  box-shadow: var(--shadow-focus);
+}
+
+/* ==========================================
+   RESPONSIVE ADAPTATIONS PAR THÈME
+   ========================================== */
+
+@media (max-width: 768px) {
+  [data-theme="senior"] {
+    --font-size-base: 20px;
+    --spacing-md: 28px;
+    --spacing-lg: 42px;
+  }
+
+  [data-theme="modern"] {
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ==========================================
+   DARK MODE AUTOMATIQUE (SYSTÈME)
+   ========================================== */
+
+@media (prefers-color-scheme: dark) {
+  [data-theme="auto"] {
+    /* Hérite du thème nuit */
+    --primary-50: #1A1F2E;
+    --primary-100: #2D3548;
+    --primary-500: #818CF8;
+    --primary-600: #6366F1;
+    --primary-700: #4F46E5;
+
+    --bg-primary: #0F1419;
+    --bg-secondary: #1A1F2E;
+    --bg-tertiary: #232937;
+
+    --text-primary: #E2E8F0;
+    --text-secondary: #A0AEC0;
+    --text-tertiary: #718096;
+  }
+}

@@ -1,0 +1,304 @@
+/**
+ * Personnalités uniques pour chaque thème
+ *
+ * Ce fichier définit des caractéristiques visuelles distinctes pour chaque thème,
+ * donnant à chacun une identité unique au-delà des simples couleurs.
+ */
+
+/* ==========================================
+   LOGO COLORÉ PAR THÈME
+   ========================================== */
+
+/* Thème Médical Pro - Logo avec gradient bleu médical */
+[data-theme="medical-pro"] .logo-text {
+  background: linear-gradient(135deg, #FFFFFF 0%, #E0F2FE 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Thème Sénior - Logo extra visible */
+[data-theme="senior"] .logo-text {
+  color: white;
+  font-size: 1.75rem;
+  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Thème Nuit - Logo avec glow néon */
+[data-theme="night"] .logo-text {
+  color: #60A5FA;
+  text-shadow: 0 0 10px rgba(96, 165, 250, 0.5),
+               0 0 20px rgba(96, 165, 250, 0.3),
+               0 0 30px rgba(96, 165, 250, 0.2);
+  animation: neon-pulse 3s ease-in-out infinite;
+}
+
+@keyframes neon-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+/* Thème Accessibilité - Logo haute visibilité */
+[data-theme="accessibility"] .logo-text {
+  color: #000000;
+  text-shadow: 0 0 0 transparent;
+  font-weight: 900;
+}
+
+/* Thème Moderne - Logo avec gradient arc-en-ciel */
+[data-theme="modern"] .logo-text {
+  background: linear-gradient(135deg, #D946EF 0%, #A855F7 50%, #60A5FA 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shift 3s ease infinite;
+  background-size: 200% 200%;
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Thème Minimaliste - Logo épuré noir */
+[data-theme="minimalist"] .logo-text {
+  color: #18181B;
+  text-shadow: none;
+}
+
+/* ==========================================
+   THÈMES CLASSIQUES - PERSONNALITÉS
+   ========================================== */
+
+/* Classic Blue - Effet vague */
+[data-theme="classic-blue"] .card {
+  position: relative;
+  overflow: hidden;
+}
+
+[data-theme="classic-blue"] .card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg,
+    transparent,
+    var(--primary-500),
+    transparent
+  );
+  animation: wave-slide 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes wave-slide {
+  0%, 100% { transform: translateX(-100%); }
+  50% { transform: translateX(100%); }
+}
+
+/* Medical Green - Effet de croissance organique */
+[data-theme="medical-green"] .stat-card {
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+[data-theme="medical-green"] .stat-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 30px rgba(34, 197, 94, 0.2);
+}
+
+/* Warm Orange - Effet chaleur */
+[data-theme="warm-orange"] button:hover {
+  background: linear-gradient(135deg,
+    var(--primary-500) 0%,
+    var(--primary-600) 100%
+  );
+  box-shadow: 0 5px 20px rgba(249, 115, 22, 0.4);
+}
+
+/* Purple Pro - Effet royal */
+[data-theme="purple-pro"] .card {
+  border-top: 3px solid var(--primary-500);
+}
+
+[data-theme="purple-pro"] .logo-text {
+  background: linear-gradient(135deg, #FFFFFF 0%, #F3E8FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Ocean Teal - Effet vague marine */
+[data-theme="ocean-teal"] .dashboard-welcome {
+  position: relative;
+}
+
+[data-theme="ocean-teal"] .dashboard-welcome::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(transparent, rgba(20, 184, 166, 0.05));
+  pointer-events: none;
+}
+
+/* Sunset Pink - Effet coucher de soleil */
+[data-theme="sunset-pink"] .logo-text {
+  background: linear-gradient(135deg, #FFFFFF 0%, #FCE7F3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+[data-theme="sunset-pink"] .sidebar {
+  position: relative;
+}
+
+[data-theme="sunset-pink"] .sidebar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg,
+    rgba(244, 114, 182, 0.1) 0%,
+    transparent 50%
+  );
+  pointer-events: none;
+}
+
+/* Fresh Mint - Effet fraîcheur */
+[data-theme="fresh-mint"] .card:hover {
+  box-shadow: 0 10px 30px rgba(16, 185, 129, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Sky Blue - Effet nuages */
+[data-theme="sky-blue"] .logo-text {
+  background: linear-gradient(135deg, #FFFFFF 0%, #DBEAFE 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Elegant Gray - Effet sophistiqué */
+[data-theme="elegant-gray"] .card {
+  border-left: 4px solid var(--primary-500);
+}
+
+/* Vibrant Red - Effet énergique */
+[data-theme="vibrant-red"] button:hover {
+  animation: pulse-red 0.5s ease;
+}
+
+@keyframes pulse-red {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* ==========================================
+   THÈMES SOMBRES - PERSONNALITÉS
+   ========================================== */
+
+/* Dark Blue - Effet espace profond */
+[data-theme="dark-blue"] .logo-text {
+  color: #60A5FA;
+  text-shadow: 0 0 10px rgba(96, 165, 250, 0.3);
+}
+
+[data-theme="dark-blue"] .stat-card {
+  border: 1px solid rgba(96, 165, 250, 0.2);
+}
+
+/* Carbon - Effet carbone */
+[data-theme="carbon"] .card {
+  background: linear-gradient(135deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Forest Night - Effet forêt mystique */
+[data-theme="forest-night"] .logo-text {
+  color: #6EE7B7;
+  text-shadow: 0 0 10px rgba(110, 231, 183, 0.3);
+}
+
+/* Purple Haze - Effet brume violette */
+[data-theme="purple-haze"] .card {
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+}
+
+/* Midnight - Effet minuit */
+[data-theme="midnight"] .logo-text {
+  color: #93C5FD;
+  text-shadow: 0 2px 10px rgba(147, 197, 253, 0.4);
+}
+
+/* Crimson Dark - Effet sang */
+[data-theme="crimson-dark"] .logo-text {
+  color: #FDA4AF;
+  text-shadow: 0 0 10px rgba(253, 164, 175, 0.3);
+}
+
+/* Ocean Deep - Effet abyssal */
+[data-theme="ocean-deep"] .logo-text {
+  color: #67E8F9;
+  text-shadow: 0 0 10px rgba(103, 232, 249, 0.4);
+}
+
+[data-theme="ocean-deep"] .card {
+  border-bottom: 2px solid rgba(103, 232, 249, 0.3);
+}
+
+/* Slate - Effet ardoise */
+[data-theme="slate"] .card {
+  border-left: 3px solid var(--primary-500);
+}
+
+/* Charcoal - Effet mat */
+[data-theme="charcoal"] .card {
+  box-shadow: none;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Neon - Effet cyberpunk */
+[data-theme="neon"] .logo-text {
+  color: #F0ABFC;
+  text-shadow: 0 0 10px rgba(240, 171, 252, 0.6),
+               0 0 20px rgba(240, 171, 252, 0.4),
+               0 0 30px rgba(240, 171, 252, 0.2);
+  animation: neon-flicker 2s infinite;
+}
+
+@keyframes neon-flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.95; }
+  75% { opacity: 1; }
+}
+
+[data-theme="neon"] .card {
+  border: 1px solid rgba(240, 171, 252, 0.3);
+  box-shadow: 0 0 20px rgba(240, 171, 252, 0.1);
+}
+
+[data-theme="neon"] button:hover {
+  box-shadow: 0 0 20px rgba(240, 171, 252, 0.4);
+}
+
+/* ==========================================
+   TRANSITIONS GLOBALES
+   ========================================== */
+
+.logo-text {
+  transition: all 0.3s ease;
+}
+
+.card {
+  transition: all 0.3s ease;
+}

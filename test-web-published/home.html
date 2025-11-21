@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareLink v2.0.0 - Tests & Documentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            width: 100%;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(255,255,255,0.2);
+            border-radius: 999px;
+            margin: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .badge.success { background: rgba(16, 185, 129, 0.4); }
+        .badge.info { background: rgba(59, 130, 246, 0.4); }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .card-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .card-link {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: opacity 0.3s ease;
+        }
+
+        .card-link:hover {
+            opacity: 0.9;
+        }
+
+        .stats {
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            color: white;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .stat {
+            padding: 1rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        .section-title {
+            color: white;
+            text-align: center;
+            margin: 2rem 0 1rem;
+            font-size: 1.5rem;
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 3rem;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏥 CareLink v2.0.0</h1>
+            <p>Gestion Connectée de la Santé Familiale</p>
+            <div>
+                <span class="badge success">✅ Tests Jest</span>
+                <span class="badge info">📚 Documentation Complète</span>
+                <span class="badge">🔒 JSDoc 330+ blocs</span>
+                <span class="badge">🚀 v2.0.0</span>
+            </div>
+        </div>
+
+        <h3 class="section-title">🧪 Tests & Qualité</h3>
+        <div class="cards">
+            <div class="card" onclick="window.location.href='index.html'">
+                <div class="card-icon">🧪</div>
+                <h2 class="card-title">Rapport Tests Jest</h2>
+                <p class="card-description">
+                    Tests unitaires et d'intégration : Logger, DbHelper, Login, CRUD.
+                    Couverture de code détaillée.
+                </p>
+                <a href="index.html" class="card-link">Voir les tests →</a>
+            </div>
+
+            <div class="card" onclick="window.location.href='docs/index.html'">
+                <div class="card-icon">📚</div>
+                <h2 class="card-title">Documentation TypeDoc</h2>
+                <p class="card-description">
+                    Documentation API auto-générée depuis les commentaires JSDoc.
+                    Classes, interfaces, fonctions.
+                </p>
+                <a href="docs/index.html" class="card-link">Voir TypeDoc →</a>
+            </div>
+        </div>
+
+        <h3 class="section-title">📖 Documentation Projet</h3>
+        <div class="cards">
+            <div class="card">
+                <div class="card-icon">🏗️</div>
+                <h2 class="card-title">Architecture</h2>
+                <p class="card-description">
+                    Vue d'ensemble du projet : Electron + React + TypeScript + SQLite + Python Backend IA.
+                </p>
+                <a href="../docs/architecture/OVERVIEW.md" class="card-link">Architecture →</a>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🗄️</div>
+                <h2 class="card-title">Base de Données</h2>
+                <p class="card-description">
+                    Schéma complet : membres, vaccins, traitements, RDV, allergies, diagnostics, bilans.
+                </p>
+                <a href="../docs/architecture/DATABASE.md" class="card-link">Schéma DB →</a>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🔐</div>
+                <h2 class="card-title">Sécurité</h2>
+                <p class="card-description">
+                    Chiffrement AES-256, bcrypt, safeStorage Electron, isolation des processus.
+                </p>
+                <a href="../docs/architecture/SECURITY.md" class="card-link">Sécurité →</a>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">⚡</div>
+                <h2 class="card-title">API Electron IPC</h2>
+                <p class="card-description">
+                    Référence complète de l'API IPC : DB, Auth, Backup, Encryption, Python Backend.
+                </p>
+                <a href="../docs/api/ELECTRON_IPC.md" class="card-link">API IPC →</a>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">⚙️</div>
+                <h2 class="card-title">Services TypeScript</h2>
+                <p class="card-description">
+                    InteractionChecker, HealthAnalyzer, OCR, PDF, QRCode, ChatService, SmartAlerts.
+                </p>
+                <a href="../docs/api/SERVICES.md" class="card-link">Services →</a>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🐍</div>
+                <h2 class="card-title">Backend Python IA</h2>
+                <p class="card-description">
+                    FastAPI + Sentence-BERT : analyse symptômes, interactions médicaments, prédiction risques.
+                </p>
+                <a href="../docs/api/PYTHON_BACKEND.md" class="card-link">Python API →</a>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🧩</div>
+                <h2 class="card-title">Composants React</h2>
+                <p class="card-description">
+                    Sidebar, TopBar, Toast, Alert, ConfirmModal, StatCard, AIStatusBadge, OllamaSetup.
+                </p>
+                <a href="../docs/components/COMPONENTS.md" class="card-link">Composants →</a>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">📄</div>
+                <h2 class="card-title">Pages</h2>
+                <p class="card-description">
+                    Dashboard, Vaccins, Traitements, RDV, Analytics, ChatDoctor, Scanner, Backup, Config.
+                </p>
+                <a href="../docs/pages/PAGES.md" class="card-link">Pages →</a>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">📜</div>
+                <h2 class="card-title">Scripts Utilitaires</h2>
+                <p class="card-description">
+                    Seed DB, fix-dates, diagnostic, backup scripts, setup Python backend.
+                </p>
+                <a href="../docs/scripts/SCRIPTS.md" class="card-link">Scripts →</a>
+            </div>
+        </div>
+
+        <div class="stats">
+            <h2 style="margin-bottom: 1rem;">📊 Statistiques du Projet</h2>
+            <div class="stats-grid">
+                <div class="stat">
+                    <div class="stat-number">76</div>
+                    <div class="stat-label">Fichiers TS/TSX</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">330+</div>
+                    <div class="stat-label">Blocs JSDoc</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">16</div>
+                    <div class="stat-label">Pages</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">12</div>
+                    <div class="stat-label">Composants</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">15</div>
+                    <div class="stat-label">Services</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">20+</div>
+                    <div class="stat-label">Thèmes</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>CareLink v2.0.0</strong> - Gestion Connectée de la Santé Familiale</p>
+            <p>Créé par VIEY David | © 2025</p>
+        </div>
+    </div>
+</body>
+</html>

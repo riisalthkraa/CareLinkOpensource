@@ -1,0 +1,832 @@
+/**
+ * ==========================================
+ * SYSTÈME DE THÈMES - CARELINK
+ * ==========================================
+ *
+ * Ce fichier définit 20 thèmes complets pour l'application CareLink.
+ * Chaque thème utilise des variables CSS (custom properties) pour assurer
+ * une cohérence visuelle complète sur toute l'interface.
+ *
+ * STRUCTURE:
+ * - 10 thèmes clairs (light) - Pour une utilisation diurne
+ * - 10 thèmes sombres (dark) - Pour réduire la fatigue oculaire
+ *
+ * VARIABLES CSS PAR THÈME:
+ * --primary-*     : Couleur principale (boutons, liens, accents)
+ * --success-*     : Couleur de succès (validations, messages positifs)
+ * --warning-*     : Couleur d'avertissement (alertes modérées)
+ * --error-*       : Couleur d'erreur (messages d'erreur, danger)
+ * --info-*        : Couleur d'information (notifications neutres)
+ * --bg-*          : Couleurs de fond (primary, secondary, tertiary, hover)
+ * --text-*        : Couleurs de texte (primary, secondary, tertiary)
+ * --border-*      : Couleurs de bordures (light, medium, dark)
+ * --sidebar-*     : Gradients pour la barre latérale
+ *
+ * UTILISATION:
+ * Le thème actif est appliqué via l'attribut [data-theme] sur <html>.
+ * Exemple: <html data-theme="classic-blue">
+ *
+ * GESTION:
+ * - ThemeContext.tsx : Logique de gestion du thème
+ * - Config.tsx : Interface de sélection du thème
+ * - index.css : Utilise ces variables pour styler les composants
+ *
+ * CONTRASTE:
+ * Tous les thèmes respectent les normes WCAG pour l'accessibilité.
+ * Aucun thème ne présente de problème de lisibilité (noir sur noir, blanc sur blanc).
+ */
+
+/* ==========================================
+   THÈMES CLAIRS (10)
+   ========================================== */
+
+/* 1. CLASSIC BLUE - Soft Nordic Blue (DEFAULT) */
+[data-theme="classic-blue"] {
+  --primary-50: #EFF6FF;
+  --primary-100: #DBEAFE;
+  --primary-500: #3B82F6;
+  --primary-600: #2563EB;
+  --primary-700: #1D4ED8;
+
+  --success-50: #ECFDF5;
+  --success-500: #10B981;
+  --success-600: #059669;
+
+  --warning-50: #FFFBEB;
+  --warning-500: #F59E0B;
+
+  --error-50: #FEF2F2;
+  --error-500: #EF4444;
+
+  --info-50: #F0F9FF;
+  --info-500: #06B6D4;
+
+  --bg-primary: #F8FAFC;
+  --bg-secondary: #F1F5F9;
+  --bg-tertiary: #FFFFFF;
+  --bg-hover: #E2E8F0;
+
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-tertiary: #64748B;
+  --text-on-primary: #1A1A1A;
+
+  --border-light: #E2E8F0;
+  --border-medium: #CBD5E1;
+  --border-dark: #94A3B8;
+
+  --sidebar-gradient-start: #1E293B;
+  --sidebar-gradient-end: #334155;
+}
+
+/* 2. MEDICAL GREEN - Sage & Eucalyptus */
+[data-theme="medical-green"] {
+  --primary-50: #F0FDF4;
+  --primary-100: #DCFCE7;
+  --primary-500: #22C55E;
+  --primary-600: #16A34A;
+  --primary-700: #15803D;
+
+  --success-50: #ECFDF5;
+  --success-500: #10B981;
+  --success-600: #059669;
+
+  --warning-50: #FFFBEB;
+  --warning-500: #F59E0B;
+
+  --error-50: #FEF2F2;
+  --error-500: #EF4444;
+
+  --info-50: #ECFEFF;
+  --info-500: #06B6D4;
+
+  --bg-primary: #F9FAFB;
+  --bg-secondary: #F0FDF4;
+  --bg-tertiary: #FFFFFF;
+  --bg-hover: #DCFCE7;
+
+  --text-primary: #14532D;
+  --text-secondary: #166534;
+  --text-tertiary: #16A34A;
+  --text-on-primary: #1A1A1A;
+
+  --border-light: #D1FAE5;
+  --border-medium: #A7F3D0;
+  --border-dark: #6EE7B7;
+
+  --sidebar-gradient-start: #14532D;
+  --sidebar-gradient-end: #166534;
+}
+
+/* 3. WARM ORANGE - Terracotta & Clay */
+[data-theme="warm-orange"] {
+  --primary-50: #FFF7ED;
+  --primary-100: #FFEDD5;
+  --primary-500: #F97316;
+  --primary-600: #EA580C;
+  --primary-700: #C2410C;
+
+  --success-50: #F0FDF4;
+  --success-500: #22C55E;
+  --success-600: #16A34A;
+
+  --warning-50: #FEFCE8;
+  --warning-500: #EAB308;
+
+  --error-50: #FEF2F2;
+  --error-500: #DC2626;
+
+  --info-50: #EFF6FF;
+  --info-500: #3B82F6;
+
+  --bg-primary: #FFFAF5;
+  --bg-secondary: #FFF7ED;
+  --bg-tertiary: #FFFFFF;
+  --bg-hover: #FFEDD5;
+
+  --text-primary: #431407;
+  --text-secondary: #7C2D12;
+  --text-tertiary: #9A3412;
+  --text-on-primary: #1A1A1A;
+
+  --border-light: #FFEDD5;
+  --border-medium: #FED7AA;
+  --border-dark: #FDBA74;
+
+  --sidebar-gradient-start: #431407;
+  --sidebar-gradient-end: #7C2D12;
+}
+
+/* 4. PURPLE PROFESSIONAL - Lavender Dreams */
+[data-theme="purple-pro"] {
+  --primary-50: #FAF5FF;
+  --primary-100: #F3E8FF;
+  --primary-500: #A855F7;
+  --primary-600: #9333EA;
+  --primary-700: #7E22CE;
+
+  --success-50: #F0FDF4;
+  --success-500: #22C55E;
+  --success-600: #16A34A;
+
+  --warning-50: #FFFBEB;
+  --warning-500: #F59E0B;
+
+  --error-50: #FEF2F2;
+  --error-500: #EF4444;
+
+  --info-50: #EFF6FF;
+  --info-500: #3B82F6;
+
+  --bg-primary: #FDFAFF;
+  --bg-secondary: #FAF5FF;
+  --bg-tertiary: #FFFFFF;
+  --bg-hover: #F3E8FF;
+
+  --text-primary: #3B0764;
+  --text-secondary: #581C87;
+  --text-tertiary: #6B21A8;
+  --text-on-primary: #1A1A1A;
+
+  --border-light: #F3E8FF;
+  --border-medium: #E9D5FF;
+  --border-dark: #D8B4FE;
+
+  --sidebar-gradient-start: #3B0764;
+  --sidebar-gradient-end: #581C87;
+}
+
+/* 5. OCEAN TEAL - Aqua Marine */
+[data-theme="ocean-teal"] {
+  --primary-50: #ECFEFF;
+  --primary-100: #CFFAFE;
+  --primary-500: #06B6D4;
+  --primary-600: #0891B2;
+  --primary-700: #0E7490;
+
+  --success-50: #F0FDF4;
+  --success-500: #10B981;
+  --success-600: #059669;
+
+  --warning-50: #FFFBEB;
+  --warning-500: #F59E0B;
+
+  --error-50: #FEF2F2;
+  --error-500: #EF4444;
+
+  --info-50: #F0F9FF;
+  --info-500: #0EA5E9;
+
+  --bg-primary: #F0FDFF;
+  --bg-secondary: #ECFEFF;
+  --bg-tertiary: #FFFFFF;
+  --bg-hover: #CFFAFE;
+
+  --text-primary: #164E63;
+  --text-secondary: #155E75;
+  --text-tertiary: #0E7490;
+  --text-on-primary: #1A1A1A;
+
+  --border-light: #CFFAFE;
+  --border-medium: #A5F3FC;
+  --border-dark: #67E8F9;
+
+  --sidebar-gradient-start: #164E63;
+  --sidebar-gradient-end: #155E75;
+}
+
+/* 6. SUNSET PINK - Blush & Rose */
+[data-theme="sunset-pink"] {
+  --primary-50: #FFF1F2;
+  --primary-100: #FFE4E6;
+  --primary-500: #F43F5E;
+  --primary-600: #E11D48;
+  --primary-700: #BE123C;
+
+  --success-50: #F0FDF4;
+  --success-500: #22C55E;
+  --success-600: #16A34A;
+
+  --warning-50: #FFFBEB;
+  --warning-500: #F59E0B;
+
+  --error-50: #FEF2F2;
+  --error-500: #DC2626;
+
+  --info-50: #EFF6FF;
+  --info-500: #3B82F6;
+
+  --bg-primary: #FFFBFC;
+  --bg-secondary: #FFF1F2;
+  --bg-tertiary: #FFFFFF;
+  --bg-hover: #FFE4E6;
+
+  --text-primary: #4C0519;
+  --text-secondary: #881337;
+  --text-tertiary: #9F1239;
+  --text-on-primary: #1A1A1A;
+
+  --border-light: #FFE4E6;
+  --border-medium: #FECDD3;
+  --border-dark: #FDA4AF;
+
+  --sidebar-gradient-start: #4C0519;
+  --sidebar-gradient-end: #881337;
+}
+
+/* 7. FRESH MINT - Pistachio & Mint */
+[data-theme="fresh-mint"] {
+  --primary-50: #F0FDF9;
+  --primary-100: #CCFBEF;
+  --primary-500: #14B8A6;
+  --primary-600: #0D9488;
+  --primary-700: #0F766E;
+
+  --success-50: #ECFDF5;
+  --success-500: #10B981;
+  --success-600: #059669;
+
+  --warning-50: #FEFCE8;
+  --warning-500: #EAB308;
+
+  --error-50: #FEF2F2;
+  --error-500: #EF4444;
+
+  --info-50: #ECFEFF;
+  --info-500: #06B6D4;
+
+  --bg-primary: #F7FFFD;
+  --bg-secondary: #F0FDF9;
+  --bg-tertiary: #FFFFFF;
+  --bg-hover: #CCFBEF;
+
+  --text-primary: #134E4A;
+  --text-secondary: #115E59;
+  --text-tertiary: #0F766E;
+  --text-on-primary: #1A1A1A;
+
+  --border-light: #CCFBEF;
+  --border-medium: #99F6E4;
+  --border-dark: #5EEAD4;
+
+  --sidebar-gradient-start: #134E4A;
+  --sidebar-gradient-end: #115E59;
+}
+
+/* 8. SKY BLUE - Azure Sky */
+[data-theme="sky-blue"] {
+  --primary-50: #F0F9FF;
+  --primary-100: #E0F2FE;
+  --primary-500: #0EA5E9;
+  --primary-600: #0284C7;
+  --primary-700: #0369A1;
+
+  --success-50: #F0FDF4;
+  --success-500: #22C55E;
+  --success-600: #16A34A;
+
+  --warning-50: #FFFBEB;
+  --warning-500: #F59E0B;
+
+  --error-50: #FEF2F2;
+  --error-500: #EF4444;
+
+  --info-50: #ECFEFF;
+  --info-500: #06B6D4;
+
+  --bg-primary: #F7FCFF;
+  --bg-secondary: #F0F9FF;
+  --bg-tertiary: #FFFFFF;
+  --bg-hover: #E0F2FE;
+
+  --text-primary: #0C4A6E;
+  --text-secondary: #075985;
+  --text-tertiary: #0369A1;
+  --text-on-primary: #1A1A1A;
+
+  --border-light: #E0F2FE;
+  --border-medium: #BAE6FD;
+  --border-dark: #7DD3FC;
+
+  --sidebar-gradient-start: #0C4A6E;
+  --sidebar-gradient-end: #075985;
+}
+
+/* 9. ELEGANT GRAY - Platinum & Graphite */
+[data-theme="elegant-gray"] {
+  --primary-50: #F9FAFB;
+  --primary-100: #F3F4F6;
+  --primary-500: #6B7280;
+  --primary-600: #4B5563;
+  --primary-700: #374151;
+
+  --success-50: #F0FDF4;
+  --success-500: #22C55E;
+  --success-600: #16A34A;
+
+  --warning-50: #FFFBEB;
+  --warning-500: #F59E0B;
+
+  --error-50: #FEF2F2;
+  --error-500: #EF4444;
+
+  --info-50: #EFF6FF;
+  --info-500: #3B82F6;
+
+  --bg-primary: #FAFBFC;
+  --bg-secondary: #F9FAFB;
+  --bg-tertiary: #FFFFFF;
+  --bg-hover: #F3F4F6;
+
+  --text-primary: #111827;
+  --text-secondary: #374151;
+  --text-tertiary: #4B5563;
+  --text-on-primary: #1A1A1A;
+
+  --border-light: #F3F4F6;
+  --border-medium: #E5E7EB;
+  --border-dark: #D1D5DB;
+
+  --sidebar-gradient-start: #111827;
+  --sidebar-gradient-end: #1F2937;
+}
+
+/* 10. VIBRANT RED - Coral & Crimson */
+[data-theme="vibrant-red"] {
+  --primary-50: #FEF2F2;
+  --primary-100: #FEE2E2;
+  --primary-500: #EF4444;
+  --primary-600: #DC2626;
+  --primary-700: #B91C1C;
+
+  --success-50: #F0FDF4;
+  --success-500: #22C55E;
+  --success-600: #16A34A;
+
+  --warning-50: #FFFBEB;
+  --warning-500: #F59E0B;
+
+  --error-50: #FEF2F2;
+  --error-500: #DC2626;
+
+  --info-50: #EFF6FF;
+  --info-500: #3B82F6;
+
+  --bg-primary: #FFFBFB;
+  --bg-secondary: #FEF2F2;
+  --bg-tertiary: #FFFFFF;
+  --bg-hover: #FEE2E2;
+
+  --text-primary: #450A0A;
+  --text-secondary: #7F1D1D;
+  --text-tertiary: #991B1B;
+  --text-on-primary: #1A1A1A;
+
+  --border-light: #FEE2E2;
+  --border-medium: #FECACA;
+  --border-dark: #FCA5A5;
+
+  --sidebar-gradient-start: #450A0A;
+  --sidebar-gradient-end: #7F1D1D;
+}
+
+/* ==========================================
+   THÈMES SOMBRES (10)
+   ========================================== */
+
+/**
+ * Les thèmes sombres utilisent des fonds très sombres et des textes clairs
+ * pour réduire la fatigue oculaire lors d'utilisations prolongées ou nocturnes.
+ *
+ * Tous les thèmes sombres garantissent un contraste optimal pour la lisibilité.
+ */
+
+/* 11. DARK BLUE - OLED Azure Deep */
+[data-theme="dark-blue"] {
+  --primary-50: #0F2942;
+  --primary-100: #1E4976;
+  --primary-500: #3B9BFF;
+  --primary-600: #2E7FE6;
+  --primary-700: #2266CC;
+
+  --success-50: #0A3D2A;
+  --success-500: #00E676;
+  --success-600: #00C965;
+
+  --warning-50: #4A3200;
+  --warning-500: #FFB800;
+
+  --error-50: #4D1414;
+  --error-500: #FF5370;
+
+  --info-50: #0A2E42;
+  --info-500: #00D4FF;
+
+  --bg-primary: #000914;
+  --bg-secondary: #0A1929;
+  --bg-tertiary: #132D45;
+  --bg-hover: #1A3A54;
+
+  --text-primary: #F0F6FF;
+  --text-secondary: #C5D9F2;
+  --text-tertiary: #91B4D9;
+  --text-on-primary: #FFFFFF;
+
+  --border-light: #1A3347;
+  --border-medium: #2D4A66;
+  --border-dark: #3B6280;
+
+  --sidebar-gradient-start: #000914;
+  --sidebar-gradient-end: #0F1F30;
+}
+
+/* 12. CARBON - Pure AMOLED Black */
+[data-theme="carbon"] {
+  --primary-50: #1A1A1A;
+  --primary-100: #2E2E2E;
+  --primary-500: #00E5FF;
+  --primary-600: #00C8E6;
+  --primary-700: #00A3BF;
+
+  --success-50: #0D3D2D;
+  --success-500: #00FF9F;
+  --success-600: #00E68A;
+
+  --warning-50: #3D2F0D;
+  --warning-500: #FFC700;
+
+  --error-50: #3D0D1A;
+  --error-500: #FF3864;
+
+  --info-50: #0D1F3D;
+  --info-500: #00BFFF;
+
+  --bg-primary: #000000;
+  --bg-secondary: #0A0A0A;
+  --bg-tertiary: #1A1A1A;
+  --bg-hover: #242424;
+
+  --text-primary: #FFFFFF;
+  --text-secondary: #E0E0E0;
+  --text-tertiary: #B0B0B0;
+  --text-on-primary: #FFFFFF;
+
+  --border-light: #1A1A1A;
+  --border-medium: #333333;
+  --border-dark: #4D4D4D;
+
+  --sidebar-gradient-start: #000000;
+  --sidebar-gradient-end: #0F0F0F;
+}
+
+/* 13. FOREST NIGHT - Emerald Matrix */
+[data-theme="forest-night"] {
+  --primary-50: #0D3D2D;
+  --primary-100: #1A5A42;
+  --primary-500: #00FF9F;
+  --primary-600: #00E68A;
+  --primary-700: #00CC75;
+
+  --success-50: #0A3D2A;
+  --success-500: #00FF85;
+  --success-600: #00E673;
+
+  --warning-50: #4A3D00;
+  --warning-500: #FFE600;
+
+  --error-50: #4A0D1A;
+  --error-500: #FF2E54;
+
+  --info-50: #0D2E3D;
+  --info-500: #00FFCC;
+
+  --bg-primary: #000A05;
+  --bg-secondary: #0D1F14;
+  --bg-tertiary: #1A3326;
+  --bg-hover: #264738;
+
+  --text-primary: #E8FFF2;
+  --text-secondary: #B8F0D6;
+  --text-tertiary: #85E0B3;
+  --text-on-primary: #FFFFFF;
+
+  --border-light: #1A3326;
+  --border-medium: #2D523F;
+  --border-dark: #3D7054;
+
+  --sidebar-gradient-start: #000A05;
+  --sidebar-gradient-end: #0D1F14;
+}
+
+/* 14. PURPLE HAZE - Ultraviolet Dream */
+[data-theme="purple-haze"] {
+  --primary-50: #2E0D4A;
+  --primary-100: #4A1A70;
+  --primary-500: #B34DFF;
+  --primary-600: #9933E6;
+  --primary-700: #7A1ACC;
+
+  --success-50: #0D4A2E;
+  --success-500: #00FF85;
+  --success-600: #00E673;
+
+  --warning-50: #4A3D0D;
+  --warning-500: #FFCC00;
+
+  --error-50: #4A0D1A;
+  --error-500: #FF3D70;
+
+  --info-50: #0D1F4A;
+  --info-500: #5C8AFF;
+
+  --bg-primary: #0A0014;
+  --bg-secondary: #1A0A2E;
+  --bg-tertiary: #2E1A4A;
+  --bg-hover: #3D2661;
+
+  --text-primary: #F2E8FF;
+  --text-secondary: #D6B8FF;
+  --text-tertiary: #B885FF;
+  --text-on-primary: #FFFFFF;
+
+  --border-light: #2E1A4A;
+  --border-medium: #4A2E70;
+  --border-dark: #664396;
+
+  --sidebar-gradient-start: #0A0014;
+  --sidebar-gradient-end: #1A0A2E;
+}
+
+/* 15. MIDNIGHT - Tokyo Night Storm */
+[data-theme="midnight"] {
+  --primary-50: #1A2842;
+  --primary-100: #2D3E5C;
+  --primary-500: #7AA2F7;
+  --primary-600: #5C8AE6;
+  --primary-700: #4470CC;
+
+  --success-50: #0D3D2D;
+  --success-500: #73DACA;
+  --success-600: #56C4B3;
+
+  --warning-50: #4A3D0D;
+  --warning-500: #E0AF68;
+
+  --error-50: #4A0D1A;
+  --error-500: #F7768E;
+
+  --info-50: #0D2E3D;
+  --info-500: #7DCFFF;
+
+  --bg-primary: #0D111A;
+  --bg-secondary: #1A1F2E;
+  --bg-tertiary: #24283B;
+  --bg-hover: #2D3348;
+
+  --text-primary: #E0E8FF;
+  --text-secondary: #C0CAF5;
+  --text-tertiary: #9AA5CE;
+  --text-on-primary: #FFFFFF;
+
+  --border-light: #24283B;
+  --border-medium: #33384D;
+  --border-dark: #414868;
+
+  --sidebar-gradient-start: #0D111A;
+  --sidebar-gradient-end: #1A1F2E;
+}
+
+/* 16. CRIMSON DARK - Blood Moon */
+[data-theme="crimson-dark"] {
+  --primary-50: #4A0D1A;
+  --primary-100: #70142E;
+  --primary-500: #FF3864;
+  --primary-600: #E62952;
+  --primary-700: #CC1A40;
+
+  --success-50: #0D4A2E;
+  --success-500: #00FF85;
+  --success-600: #00E673;
+
+  --warning-50: #4A3300;
+  --warning-500: #FFB800;
+
+  --error-50: #4A0D0D;
+  --error-500: #FF1F3D;
+
+  --info-50: #0D1F4A;
+  --info-500: #5C8AFF;
+
+  --bg-primary: #0A0005;
+  --bg-secondary: #1A0A0F;
+  --bg-tertiary: #2E1A1F;
+  --bg-hover: #3D242B;
+
+  --text-primary: #FFE8ED;
+  --text-secondary: #FFB8C8;
+  --text-tertiary: #FF85A3;
+  --text-on-primary: #FFFFFF;
+
+  --border-light: #2E1A1F;
+  --border-medium: #4A2E36;
+  --border-dark: #66424C;
+
+  --sidebar-gradient-start: #0A0005;
+  --sidebar-gradient-end: #1A0A0F;
+}
+
+/* 17. OCEAN DEEP - Abyssal Cyan */
+[data-theme="ocean-deep"] {
+  --primary-50: #0D2E3D;
+  --primary-100: #1A4A66;
+  --primary-500: #00D4FF;
+  --primary-600: #00B8E6;
+  --primary-700: #009BCC;
+
+  --success-50: #0D3D2E;
+  --success-500: #00FFB8;
+  --success-600: #00E6A3;
+
+  --warning-50: #3D330D;
+  --warning-500: #FFD633;
+
+  --error-50: #3D0D1A;
+  --error-500: #FF5270;
+
+  --info-50: #0D2833;
+  --info-500: #52E0FF;
+
+  --bg-primary: #00070A;
+  --bg-secondary: #0A1419;
+  --bg-tertiary: #1A2833;
+  --bg-hover: #24384A;
+
+  --text-primary: #E0F8FF;
+  --text-secondary: #B8E8F5;
+  --text-tertiary: #85D6E8;
+  --text-on-primary: #FFFFFF;
+
+  --border-light: #1A2833;
+  --border-medium: #2D4252;
+  --border-dark: #3D5C70;
+
+  --sidebar-gradient-start: #00070A;
+  --sidebar-gradient-end: #0A1419;
+}
+
+/* 18. SLATE - Graphite Pro */
+[data-theme="slate"] {
+  --primary-50: #2D3842;
+  --primary-100: #3D4D5C;
+  --primary-500: #8AB4F8;
+  --primary-600: #6B9AE6;
+  --primary-700: #5280D1;
+
+  --success-50: #1A3D2E;
+  --success-500: #81C995;
+  --success-600: #68B37F;
+
+  --warning-50: #3D2E1A;
+  --warning-500: #FFB84D;
+
+  --error-50: #3D1A1A;
+  --error-500: #F28B82;
+
+  --info-50: #1A2E3D;
+  --info-500: #78D9EC;
+
+  --bg-primary: #0F1419;
+  --bg-secondary: #1A1F26;
+  --bg-tertiary: #2D343D;
+  --bg-hover: #3D4652;
+
+  --text-primary: #E8EAED;
+  --text-secondary: #BDC1C6;
+  --text-tertiary: #9AA0A6;
+  --text-on-primary: #FFFFFF;
+
+  --border-light: #2D343D;
+  --border-medium: #3D4652;
+  --border-dark: #5F6368;
+
+  --sidebar-gradient-start: #0F1419;
+  --sidebar-gradient-end: #1A1F26;
+}
+
+/* 19. CHARCOAL - Stealth Mode */
+[data-theme="charcoal"] {
+  --primary-50: #2E2E2E;
+  --primary-100: #424242;
+  --primary-500: #FF9E64;
+  --primary-600: #E68A52;
+  --primary-700: #CC7540;
+
+  --success-50: #1A3D2E;
+  --success-500: #73DACA;
+  --success-600: #56C4B3;
+
+  --warning-50: #3D330D;
+  --warning-500: #FFE066;
+
+  --error-50: #3D1A1A;
+  --error-500: #FF7A93;
+
+  --info-50: #1A2E3D;
+  --info-500: #7DCFFF;
+
+  --bg-primary: #0F0F0F;
+  --bg-secondary: #1A1A1A;
+  --bg-tertiary: #2E2E2E;
+  --bg-hover: #3D3D3D;
+
+  --text-primary: #E0E0E0;
+  --text-secondary: #C0C0C0;
+  --text-tertiary: #9E9E9E;
+  --text-on-primary: #FFFFFF;
+
+  --border-light: #2E2E2E;
+  --border-medium: #424242;
+  --border-dark: #616161;
+
+  --sidebar-gradient-start: #0F0F0F;
+  --sidebar-gradient-end: #1A1A1A;
+}
+
+/* 20. NEON - Synthwave Pulse */
+[data-theme="neon"] {
+  --primary-50: #4A0D4A;
+  --primary-100: #701A70;
+  --primary-500: #FF00FF;
+  --primary-600: #E600E6;
+  --primary-700: #CC00CC;
+
+  --success-50: #0D4A3D;
+  --success-500: #00FFD4;
+  --success-600: #00E6BA;
+
+  --warning-50: #4A3D0D;
+  --warning-500: #FFFF00;
+
+  --error-50: #4A0D1A;
+  --error-500: #FF0066;
+
+  --info-50: #0D1A4A;
+  --info-500: #00FFFF;
+
+  --bg-primary: #0A000A;
+  --bg-secondary: #150515;
+  --bg-tertiary: #1F0A1F;
+  --bg-hover: #2A0F2A;
+
+  --text-primary: #FFFFFF;
+  --text-secondary: #E6B3FF;
+  --text-tertiary: #CC66FF;
+  --text-on-primary: #FFFFFF;
+
+  --border-light: #2E1A2E;
+  --border-medium: #4A2E4A;
+  --border-dark: #704270;
+
+  --sidebar-gradient-start: #0A000A;
+  --sidebar-gradient-end: #1A0A1A;
+}

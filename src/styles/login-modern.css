@@ -1,0 +1,759 @@
+/**
+ * ==========================================
+ * LOGIN MODERNE - CARELINK 2025
+ * ==========================================
+ *
+ * Refonte professionnelle de l'écran de connexion avec:
+ * - Design moderne glassmorphism
+ * - Animations fluides et micro-interactions
+ * - Fond dynamique médical
+ * - Compatibilité totale avec les 20 thèmes
+ * - Responsive desktop + tablet
+ *
+ * UTILISATION:
+ * Importer ce fichier dans Login.tsx
+ * import '../styles/login-modern.css'
+ *
+ * COMPATIBILITÉ:
+ * Compatible avec tous les thèmes existants (light + dark)
+ * Ne casse aucun code existant
+ */
+
+/* ==========================================
+   FOND MODERNE - GRADIENT DYNAMIQUE
+   ========================================== */
+
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+
+  /* Gradient médical moderne - Version claire par défaut */
+  background: linear-gradient(135deg,
+    #667eea 0%,
+    #764ba2 25%,
+    #f093fb 50%,
+    #667eea 100%
+  );
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+/* Gradient adapté pour thèmes sombres */
+[data-theme*="dark"] .login-container,
+[data-theme="carbon"] .login-container,
+[data-theme="midnight"] .login-container,
+[data-theme="charcoal"] .login-container,
+[data-theme="slate"] .login-container,
+[data-theme="neon"] .login-container {
+  background: linear-gradient(135deg,
+    #0F172A 0%,
+    #1E293B 25%,
+    #334155 50%,
+    #0F172A 100%
+  );
+}
+
+/* Animation du gradient */
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Overlay avec effet de texture médicale */
+.login-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.04) 0%, transparent 50%);
+  pointer-events: none;
+  animation: pulseOverlay 8s ease-in-out infinite;
+}
+
+@keyframes pulseOverlay {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* Particules flottantes (effet médical subtil) */
+.login-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    radial-gradient(2px 2px at 20% 30%, rgba(255, 255, 255, 0.3), transparent),
+    radial-gradient(2px 2px at 60% 70%, rgba(255, 255, 255, 0.3), transparent),
+    radial-gradient(1px 1px at 50% 50%, rgba(255, 255, 255, 0.3), transparent),
+    radial-gradient(1px 1px at 80% 10%, rgba(255, 255, 255, 0.3), transparent),
+    radial-gradient(2px 2px at 90% 60%, rgba(255, 255, 255, 0.3), transparent),
+    radial-gradient(1px 1px at 33% 85%, rgba(255, 255, 255, 0.3), transparent);
+  background-size: 200% 200%;
+  background-position: 50% 50%;
+  animation: particlesFloat 20s linear infinite;
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+@keyframes particlesFloat {
+  from {
+    background-position: 0% 0%;
+  }
+  to {
+    background-position: 100% 100%;
+  }
+}
+
+/* ==========================================
+   CARTE DE CONNEXION - GLASSMORPHISM
+   ========================================== */
+
+.login-box {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-radius: 24px;
+  padding: 3rem;
+  max-width: 480px;
+  width: 100%;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    0 2px 8px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  position: relative;
+  z-index: 10;
+  animation: slideUpFadeIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-origin: center bottom;
+}
+
+/* Version thème sombre */
+[data-theme*="dark"] .login-box,
+[data-theme="carbon"] .login-box,
+[data-theme="midnight"] .login-box,
+[data-theme="charcoal"] .login-box,
+[data-theme="slate"] .login-box,
+[data-theme="neon"] .login-box {
+  background: rgba(20, 20, 30, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+@keyframes slideUpFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Effet de brillance subtil sur la carte */
+.login-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--primary-400, #60A5FA) 50%,
+    transparent 100%
+  );
+  opacity: 0.6;
+  border-radius: 24px 24px 0 0;
+}
+
+/* ==========================================
+   HEADER - LOGO & TITRE
+   ========================================== */
+
+.login-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  animation: fadeInDown 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.login-header h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 0;
+  background: linear-gradient(135deg, var(--primary-600, #2563EB), var(--primary-400, #60A5FA));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.02em;
+  position: relative;
+  display: inline-block;
+  padding: 0.2rem 0;
+}
+
+/* Icône médicale moderne */
+.login-header h1::before {
+  content: '🏥';
+  margin-right: 0.5rem;
+  filter: drop-shadow(0 2px 8px rgba(59, 130, 246, 0.3));
+  animation: iconPulse 3s ease-in-out infinite;
+}
+
+@keyframes iconPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.login-subtitle {
+  color: var(--text-secondary, #64748B);
+  margin-top: 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  opacity: 0.9;
+}
+
+/* ==========================================
+   MESSAGE DE BIENVENUE
+   ========================================== */
+
+.welcome-message {
+  text-align: center;
+  padding: 1.5rem;
+  background: linear-gradient(135deg,
+    var(--primary-50, #EFF6FF) 0%,
+    var(--bg-secondary, #F1F5F9) 100%
+  );
+  border-radius: 16px;
+  margin: 1.5rem 0;
+  border: 1px solid var(--border-light, #E2E8F0);
+  animation: fadeInScale 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s both;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Version thème sombre */
+[data-theme*="dark"] .welcome-message,
+[data-theme="carbon"] .welcome-message,
+[data-theme="midnight"] .welcome-message,
+[data-theme="charcoal"] .welcome-message,
+[data-theme="slate"] .welcome-message {
+  background: linear-gradient(135deg,
+    rgba(59, 130, 246, 0.1) 0%,
+    rgba(59, 130, 246, 0.05) 100%
+  );
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.welcome-message::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 100%
+  );
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% {
+    left: -100%;
+  }
+  50% {
+    left: 100%;
+  }
+}
+
+.welcome-message h2 {
+  margin: 0 0 0.5rem 0;
+  color: var(--text-primary, #0F172A);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.welcome-message p {
+  margin: 0;
+  color: var(--text-secondary, #475569);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.config-reminder {
+  color: var(--primary-600, #2563EB) !important;
+  font-size: 0.85rem !important;
+  margin: 0.75rem 0 0 0 !important;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* ==========================================
+   FORMULAIRE - INPUTS MODERNES
+   ========================================== */
+
+.login-form {
+  animation: fadeIn 0.8s ease 0.6s both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--text-primary, #0F172A);
+  font-size: 0.9rem;
+  letter-spacing: 0.01em;
+  transition: color 0.2s ease;
+}
+
+/* Input moderne avec effet de focus élégant */
+.form-group input {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 2px solid var(--border-medium, #CBD5E1);
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: var(--bg-tertiary, #FFFFFF);
+  color: var(--text-primary, #0F172A);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.form-group input::placeholder {
+  color: var(--text-tertiary, #94A3B8);
+  opacity: 0.7;
+}
+
+/* Effet focus moderne */
+.form-group input:focus {
+  outline: none;
+  border-color: var(--primary-500, #3B82F6);
+  background: var(--bg-tertiary, #FFFFFF);
+  box-shadow:
+    0 0 0 4px var(--primary-50, rgba(59, 130, 246, 0.1)),
+    0 1px 3px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+/* Animation sur hover */
+.form-group input:hover:not(:focus) {
+  border-color: var(--border-dark, #94A3B8);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+/* ==========================================
+   MESSAGES D'ERREUR
+   ========================================== */
+
+.error-message {
+  background: linear-gradient(135deg,
+    var(--error-50, #FEF2F2) 0%,
+    rgba(239, 68, 68, 0.05) 100%
+  );
+  border: 2px solid var(--error-500, #EF4444);
+  border-left-width: 4px;
+  color: var(--error-600, #DC2626);
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 600;
+  animation: shakeError 0.5s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.15);
+}
+
+@keyframes shakeError {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-10px);
+  }
+  75% {
+    transform: translateX(10px);
+  }
+}
+
+/* ==========================================
+   BOUTONS - DESIGN MODERNE
+   ========================================== */
+
+.btn-primary {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 700;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: inherit;
+  position: relative;
+  overflow: hidden;
+
+  /* Gradient moderne */
+  background: linear-gradient(135deg,
+    var(--primary-600, #2563EB) 0%,
+    var(--primary-500, #3B82F6) 100%
+  );
+  color: var(--text-on-primary, #FFFFFF);
+  box-shadow:
+    0 4px 12px rgba(37, 99, 235, 0.3),
+    0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Effet de brillance au survol */
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    transparent 100%
+  );
+  transition: left 0.5s ease;
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 6px 20px rgba(37, 99, 235, 0.4),
+    0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow:
+    0 2px 8px rgba(37, 99, 235, 0.3),
+    0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Bouton secondaire (remplissage rapide) */
+.btn-secondary {
+  width: 100%;
+  padding: 0.875rem 1.5rem;
+  border-radius: 12px;
+  border: 2px solid var(--border-medium, #CBD5E1);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: inherit;
+  background: var(--bg-secondary, #F1F5F9);
+  color: var(--text-primary, #0F172A);
+}
+
+.btn-secondary:hover {
+  background: var(--bg-hover, #E2E8F0);
+  border-color: var(--primary-500, #3B82F6);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.btn-secondary:active {
+  transform: translateY(0);
+}
+
+/* ==========================================
+   SECTIONS AUXILIAIRES
+   ========================================== */
+
+.helper-section {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-light, #E2E8F0);
+  text-align: center;
+  animation: fadeIn 1s ease 0.8s both;
+}
+
+.helper-text {
+  color: var(--text-secondary, #64748B);
+  margin-bottom: 0.875rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.info-section {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-light, #E2E8F0);
+  text-align: center;
+  animation: fadeIn 1s ease 1s both;
+}
+
+.info-text {
+  color: var(--primary-600, #2563EB);
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.info-text:hover {
+  color: var(--primary-700, #1D4ED8);
+  transform: translateX(2px);
+}
+
+/* ==========================================
+   FOOTER - MESSAGE DE SÉCURITÉ
+   ========================================== */
+
+.login-footer {
+  text-align: center;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-light, #E2E8F0);
+  animation: fadeIn 1s ease 1.2s both;
+}
+
+.login-footer p {
+  color: var(--text-secondary, #64748B);
+  font-size: 0.85rem;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 500;
+}
+
+/* ==========================================
+   LOADER - ANIMATION ÉLÉGANTE
+   ========================================== */
+
+.login-loader {
+  text-align: center;
+  padding: 3rem;
+  animation: fadeIn 0.5s ease;
+}
+
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 4px solid var(--bg-secondary, #F1F5F9);
+  border-top-color: var(--primary-500, #3B82F6);
+  border-radius: 50%;
+  animation: spin 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+  margin: 0 auto 1.5rem;
+  position: relative;
+}
+
+/* Double spinner pour effet élégant */
+.spinner::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  right: 4px;
+  bottom: 4px;
+  border: 4px solid transparent;
+  border-top-color: var(--primary-300, #93C5FD);
+  border-radius: 50%;
+  animation: spin 1.2s linear infinite reverse;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.login-loader p {
+  color: var(--text-primary, #0F172A);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* ==========================================
+   RESPONSIVE - TABLET & MOBILE
+   ========================================== */
+
+@media (max-width: 768px) {
+  .login-container {
+    padding: 1.5rem;
+  }
+
+  .login-box {
+    padding: 2rem 1.5rem;
+    border-radius: 20px;
+    max-width: 100%;
+  }
+
+  .login-header h1 {
+    font-size: 2rem;
+  }
+
+  .welcome-message {
+    padding: 1.25rem;
+  }
+
+  .welcome-message h2 {
+    font-size: 1.25rem;
+  }
+
+  .form-group input {
+    padding: 0.75rem 1rem;
+    font-size: 16px; /* Évite le zoom sur iOS */
+  }
+
+  .btn-primary {
+    padding: 0.875rem 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-container {
+    padding: 1rem;
+  }
+
+  .login-box {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .login-header h1 {
+    font-size: 1.75rem;
+  }
+}
+
+/* ==========================================
+   ACCESSIBILITÉ - A11Y
+   ========================================== */
+
+/* Focus visible pour navigation clavier */
+.form-group input:focus-visible,
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible {
+  outline: 3px solid var(--primary-500, #3B82F6);
+  outline-offset: 2px;
+}
+
+/* Réduction des animations si préférence utilisateur */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Contraste élevé pour meilleure lisibilité */
+@media (prefers-contrast: high) {
+  .login-box {
+    border: 3px solid var(--border-dark, #94A3B8);
+  }
+
+  .form-group input {
+    border-width: 3px;
+  }
+
+  .btn-primary {
+    border: 2px solid var(--primary-700, #1D4ED8);
+  }
+}
